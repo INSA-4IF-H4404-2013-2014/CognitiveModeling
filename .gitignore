@@ -1,0 +1,39 @@
+.DS_Store
+*.pyc
+*.o
+*.a
+*.xcworkspace
+*.gitlocal
+
+#VIM backup files
+*~
+
+
+
+#LaTeX files!
+*.log
+*.aux
+*.backup
+*.toc
+*.ind
+*.idx
+*.ilg
+*.blg
+*.out
+*.bbl
+*.dvi
+*.nav
+*.pyg
+*.snm
+*.lof
+*.glg
+*.glo
+*.gls
+*.acn
+*.acr
+*.alg
+*.ist
+
+
+#OpenOffice lock files
+.~lock.*.*#
