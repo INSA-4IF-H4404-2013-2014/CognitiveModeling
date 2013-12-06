@@ -9,9 +9,15 @@ convert_str_char([C|_],C).
 reportCreate([]).
 
 %
-% Checks an observation
+% Checks a checkbox
 %
 reportCheck(Report,CheckboxName,[CheckboxName|Report]).
+
+%
+% Unchecks a checkbox
+%
+reportUncheck(Report,CheckboxName,NewReport) :-
+    delete(Report,CheckboxName,NewReport).
 
 %
 % Does an observation is checked
