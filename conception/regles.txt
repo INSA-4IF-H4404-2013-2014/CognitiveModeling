@@ -1,0 +1,38 @@
+1 : fautes graves
+	(A17 v A14 v A4) ^( B17 v B14 v B4)
+	(A17 v A14 v A4) ^ not( B17 v B14 v B4)
+	
+2 : en stat ou a l arret
+	A1 => a0 / b 100
+	a20 => a25 / b75
+	a21 => a50 / b50
+	
+3 :	quitte un stat
+	a2 et non b2 => a100 / b0
+	a2 et b2 => a50 / b50
+	
+4 : provenant de chaussees differentes
+	a6 => a100 b 0
+	a16 et a15 et non a22 et a24 => a25 / b75
+	a16 et non a23 => a0 / b100
+	a16 et a23 =>  a100 / b0
+	a16 et a15 et a22 et a24 => a50 / b50
+	
+5 : meme sens, files differentes
+	a10 et b10 => a50 / b50
+	not a6 et not b6 et not a1 et not b1 et (a9 ou b9) => a50 / b50
+	not a10 et not b10 et a1 => a0 /b100 ----------------------redondant cat 1 -------------
+	a10 => a100 /b0
+	
+6 : en sens inverse
+	a15 et a24 => a100 / b0
+	a15 et b15 => a50 / b50
+	a25 => a50 / b50
+	
+7 : meme sens, meme file
+	a8 et b2 => a0 / b100
+	a8 et ( b3 ou b5) => a75 / b25
+	
+
+	
+	
