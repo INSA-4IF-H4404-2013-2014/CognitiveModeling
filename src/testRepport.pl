@@ -1,5 +1,6 @@
 
 :-[repport].
+:-[testUtils].
 
 testRepportObservation :-
     repportCreate(G0),
@@ -12,6 +13,6 @@ testRepportCirconstance :-
     repportCirconstance(G1,hello).
 
 testRepport :-
-    testRepportObservation,
-    testRepportCirconstance.
+    test(testRepportObservation),
+    test(testRepportCirconstance).
 
