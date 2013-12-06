@@ -2,17 +2,11 @@
 :-[repport].
 :-[testUtils].
 
-testRepportObservation :-
+testRepportIsChecked :-
     repportCreate(G0),
-    repportCheckObservation(G0,hello,G1),
-    repportObservation(G1,hello).
-
-testRepportCirconstance :-
-    repportCreate(G0),
-    repportCheckCirconstance(G0,hello,G1),
-    repportCirconstance(G1,hello).
+    repportCheck(G0,hello,G1),
+    repportIsChecked(G1,hello).
 
 testRepport :-
-    test(testRepportObservation),
-    test(testRepportCirconstance).
+    test(testRepportIsChecked).
 
