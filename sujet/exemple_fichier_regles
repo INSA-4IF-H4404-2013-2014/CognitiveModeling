@@ -1,0 +1,43 @@
+<BASES>
+ <BASE  name="quitter stat">
+  <PartOf> base de règles </PartOf>
+   <Inhibited> yes </Inhibited>
+   <RULE  name="1 quittait stat">
+    <Param> $1:Véhicule </Param>
+    <Param> $2:Véhicule </Param>
+     <If>
+       $1§c2=vrai
+       $1§c3=faux
+       $2§c2=faux
+       $1#$2 
+     </If>
+     <Then>
+      Ajouter($1§torts=100) 
+      Ajouter($2§torts=0) 
+      Calculer(²Règle§nb usage=²Règle§nb usage+1)
+     </Then>
+   </RULE>
+ </BASE>
+</BASES>
+
+<BASES>
+ <BASE  name="quitter stat">
+  <PartOf> Base de Règles </PartOf>
+   <RULE  name="les 2 qt">
+    <Param> $1:Véhicule </Param>
+    <Param> $2:Véhicule </Param>
+     <If>
+$1#$2
+$1§c2=vrai
+$2§c2=vrai
+$1§c3=faux
+$2§c3=faux
+</If>
+     <Then>
+      Ajouter($1§torts=50) 
+      Ajouter($2§torts=50) 
+     </Then>
+   </RULE>
+ </BASE>
+</BASES>
+
