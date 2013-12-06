@@ -23,7 +23,7 @@ reportIsChecked(Report,CheckboxName) :-
 % Print a given <Report>
 %
 reportPrint(Report) :-
-    findall(X,checkboxTitle(X,_),AllNames),
+    checkboxesList(AllNames),
     reportPrint(Report,AllNames).
 
 reportPrint(_,[]).
@@ -47,7 +47,7 @@ reportPrint(Report,[Name|L]) :-
 % Generates a repport asking question to the users
 %
 reportAskUser(Report,UserName) :-
-    findall(X,checkboxTitle(X,_),AllNames) ->
+    checkboxesList(AllNames) ->
     reportAskUser(Report,UserName,AllNames), !.
 
 reportAskUser(Report,_,[]) :-

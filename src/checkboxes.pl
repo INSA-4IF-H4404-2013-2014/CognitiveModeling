@@ -5,3 +5,9 @@
 checkboxTitle(c01, 'en stationnement / a l\'arret').
 checkboxTitle(c02, 'quittait un stationnement / ouvrait une portiere').
 
+%
+% lists all checkboxes's names
+%
+checkboxesList(AllNames) :-
+    findall(X,checkboxTitle(X,_),AllNames).
+
