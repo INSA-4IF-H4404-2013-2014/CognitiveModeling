@@ -1,10 +1,10 @@
 
 :- [main].
-:- [testRepport].
+:- [testReport].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LAUNCH ALL UNIT TESTS
 
 testAll :-
-    testRepport.
+    testReport.
 
