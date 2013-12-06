@@ -1,0 +1,15 @@
+4 ET 5
+8 ET 9
+12 ET 13
+1 ET case qui n'est pas 2
+(6 OU 16) ET 7
+(20 OU 21) ET not(1)
+25 ET (8 OU 9)
+23 ET 13
+
+A9 ET B9
+A16 ET B16
+A1 ET B1 ET aucune autre case
+A25 ET (B8 OU B9)
+
+Vérfier nombre de cases qui doit correspondre au nombre de cases effectivement cochées
