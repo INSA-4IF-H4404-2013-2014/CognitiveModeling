@@ -47,8 +47,8 @@ reportPrint(Report,[Name|L]) :-
 % Generates a repport asking question to the users
 %
 reportAskUser(Report,UserName) :-
-    findall(X,checkboxTitle(X,_),AllNames),
-    reportAskUser(Report,UserName,AllNames).
+    findall(X,checkboxTitle(X,_),AllNames) ->
+    reportAskUser(Report,UserName,AllNames), !.
 
 reportAskUser(Report,_,[]) :-
     reportCreate(Report).
@@ -61,10 +61,12 @@ reportAskUser(Report,UserName,[Name|NamesRemaining]) :-
     write(' > '),
     get_single_char(C),
     write('\n'),
-    reportAskUser(ReturnedReport,UserName,NamesRemaining),
-    ( convert_str_char("o",C) ->
-        reportCheck(ReturnedReport,Name,Report)
-    ); (
-        Report = ReturnedReport
+    reportAskUser(ReturnedReport,UserName,NamesRemaining) ->
+    (
+        ( convert_str_char("o",C) ->
+            reportCheck(ReturnedReport,Name,Report)
+        ); (
+            Report = ReturnedReport
+        )
     ).
 
