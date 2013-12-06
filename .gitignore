@@ -37,3 +37,6 @@
 
 #OpenOffice lock files
 .~lock.*.*#
+
+#Windows!!!!
+Thumbs.db
