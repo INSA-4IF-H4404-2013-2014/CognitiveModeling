@@ -1,10 +1,14 @@
 
 :- [main].
 :- [testReport].
+:- [testReportPrune].
+:- [testReportVerify].
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LAUNCH ALL UNIT TESTS
 
 testAll :-
-    testReport.
+    testReport,
+    testReportPrune,
+    testReportVerify.
 
