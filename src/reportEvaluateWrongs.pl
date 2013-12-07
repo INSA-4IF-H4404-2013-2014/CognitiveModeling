@@ -53,13 +53,3 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
 
-%
-% Evaluates fata mistake between tow car' reports
-%
-reportEvaluateFatalMistake(A,_,100) :-
-    reportIsChecked(A,c04);
-    reportIsChecked(A,c07);
-    reportIsChecked(A,c14).
-
-:- reportDefineRule(reportEvaluateFatalMistake).
-
