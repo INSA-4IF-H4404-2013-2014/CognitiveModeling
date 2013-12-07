@@ -36,6 +36,10 @@ testCase('testCase 6',A,B,25,1,reportRule122) :-
     reportCheck(G0,c03,A),
     reportCheck(G0,c08,B).
 
+testCase('testCase 7',A,B,0,1,reportRule123) :-
+    reportCreate(A),
+    reportCheck(A,c08,B).
+
 %
 % Proceed all test cases
 %

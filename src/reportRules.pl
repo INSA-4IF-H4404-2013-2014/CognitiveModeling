@@ -113,7 +113,7 @@ reportRule122(A,B,75) :-
 reportRule123(A,B,100) :-
     reportSamePath(A,B),
     not(reportRule121(A,B,_)),
-    not(reportRule121(A,B,_)).
+    not(reportRule122(A,B,_)).
 
 :- reportDefineRule(reportRule123).
 
