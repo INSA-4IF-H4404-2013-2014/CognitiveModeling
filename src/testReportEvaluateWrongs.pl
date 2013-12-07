@@ -3,10 +3,13 @@
 :-[reportRules].
 :-[testUtils].
 
-testReportEvaluateFatalMistake :-
-    reportCreate(G0),
-    reportCheck(G0,c04,G1),
-    reportEvaluateFatalMistake(G1,G0,100).
+
+testReportSymetricWrongs :-
+    reportSymetricWrongs(100,0),
+    reportSymetricWrongs(0,100),
+    reportSymetricWrongs(25,75),
+    reportSymetricWrongs(75,25),
+    reportSymetricWrongs(50,50).
 
 testReportEvaluateWrongsMechanism :-
     reportCreate(G0),
@@ -23,6 +26,6 @@ testReportEvaluateWrongsMechanism :-
     reportEvaluateWrongs(G3,G1,0,_).
 
 testReportEvaluateWrongs :-
-    test(testReportEvaluateFatalMistake),
+    test(testReportSymetricWrongs),
     test(testReportEvaluateWrongsMechanism).
 
