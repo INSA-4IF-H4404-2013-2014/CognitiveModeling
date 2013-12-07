@@ -18,7 +18,11 @@ reportSymetricWrongs(WrongsA,WrongsB) :-
 % Defines a new rule
 %
 reportDefineRule(RulePredicate) :-
-    assert(reportEvaluateRules(RulePredicate)).
+    reportEvaluateRules(RulePredicate) -> (
+        true
+    ); (
+        assert(reportEvaluateRules(RulePredicate))
+    ).
 
 %
 % Fetches all new rules
@@ -27,7 +31,7 @@ reportListRules(Rules) :-
     findall(X,reportEvaluateRules(X),Rules).
 
 %
-% Evaluate wrongs between to cars
+% Evaluate wrongs between tow car' reports, and return the evaluator
 %
 reportEvaluateWrongs(ReportA,ReportB,WrongsA,Evaluator) :-
     reportListRules(Rules),
@@ -50,7 +54,7 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
 
 %
-% Evaluates fata mistake between to cars' repport
+% Evaluates fata mistake between tow car' reports
 %
 reportEvaluateFatalMistake(A,_,100) :-
     reportIsChecked(A,c04);
