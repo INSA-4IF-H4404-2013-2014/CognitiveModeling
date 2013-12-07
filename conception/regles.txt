@@ -1,6 +1,6 @@
 1 : fautes graves
-	(A17 v A14 v A4) ^( B17 v B14 v B4)
-	(A17 v A14 v A4) ^ not( B17 v B14 v B4)
+	(A17 v A14 v A4) ^( B17 v B14 v B4) => a50/ b50
+	(A17 v A14 v A4) ^ not( B17 v B14 v B4) => a0/b100
 	
 2 : en stat ou a l arret
 	A1 => a0 / b 100
@@ -30,8 +30,10 @@
 	a25 => a50 / b50
 	
 7 : meme sens, meme file
-	a8 et b2 => a0 / b100
+	a8 et ( b2 ou b14 ou b4) => a0 / b100
 	a8 et ( b3 ou b5) => a75 / b25
+	sinon si a8 et bautres => a100 / b0
+
 	
 
 	
