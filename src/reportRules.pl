@@ -25,10 +25,13 @@ reportParking(A,B) :-
 %
 reportRule21(A,B,0) :-
     reportParking(A,B),
+    reportIsChecked(A,c01),
     not(reportRule24(A,B,_)),
     not(reportIsChecked(A,c20)),
-    not(reportIsChecked(A,c21)).
+    not(reportIsChecked(A,c21)),
+    not(reportRule112(A,B,_)).
 
+:- reportDefineRule(reportRule21).
 
 %
 % En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long d'un trottoir,
