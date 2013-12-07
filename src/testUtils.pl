@@ -1,6 +1,17 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TESTS UTILS
+
+testOk(Msg) :-
+    write(Msg),
+    write(': OK\n'),
+    true.
+
+testFail(Msg) :-
+    write(Msg),
+    write(': Failed\n'),
+    fail.
+
 test(TestPredicate) :-
     (call(TestPredicate) ->
-        (write(TestPredicate), write(': OK\n')), true ;
-        (write(TestPredicate), write(': Failed\n')), fail
+        testOk(TestPredicate);
+        testFail(TestPredicate)
     ), !.
+
