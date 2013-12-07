@@ -77,6 +77,11 @@ testCase('testCase 14',A,B,50,1,undefined) :-
     reportCheck(G0,c03,B),
     reportCheck(B,c02,A).
 
+testCase('testCase 15',A,B,0,1,reportRule111) :-
+    reportCreate(G0),
+    reportCheck(G0,c08,A),
+    reportCheck(G0,c10,B).
+
 %
 % Exec a specific test case
 %
