@@ -8,28 +8,44 @@
 %
 % list all test cases with expected wrongs for A
 %
-testCase('testCase 1',G,G,50,1) :-
+testCase('testCase 1',G,G,50,1,undefined) :-
     reportCreate(G).
 
-testCase('testCase 2',A,B,100,0) :-
+testCase('testCase 2',A,B,0,1,reportRule123) :-
     reportCreate(G0),
     reportCheck(G0,c11,A),
     reportCheck(A,c08,B).
 
+testCase('testCase 3',A,B,50,1,reportRule113) :-
+    reportCreate(G0),
+    reportCheck(G0,c09,A),
+    B = A.
+
+%
+% Proceed all test cases
+%
 testCase([]).
 testCase([CaseName|CaseNames]) :-
-    testCase(CaseName,A,B,WrongsA,1),
+    testCase(CaseName,A,B,WrongsA,1,TheoricRule) ->
     (
-        reportEvaluateWrongs(A,B,WrongsA,_) -> (
-            testOk(CaseName)
-        ); (
-            testFail(CaseName)
+        reportEvaluateWrongs(A,B,WrongsAC,TriggeredRule) ->
+        (
+            (
+                (WrongsAC == WrongsA, TheoricRule == TriggeredRule) -> (
+                    testOk(CaseName)
+                ); (
+                    write('# rule that has been targeted: '),
+                    write(TriggeredRule),
+                    write('\n'),
+                    testFail(CaseName)
+                )
+            ),
+            testCase(CaseNames)
         )
-    ),
-    testCase(CaseNames).
+    ).
 
 testCases :-
-    findall(X,testCase(X,_,_,_,1),CaseNames),
+    findall(X,testCase(X,_,_,_,1,_),CaseNames),
     testCase(CaseNames),
     testOk(testCases).
 

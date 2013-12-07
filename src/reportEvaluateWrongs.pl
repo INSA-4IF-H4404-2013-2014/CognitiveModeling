@@ -52,7 +52,7 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
         )
     );
     call(Rule,ReportB,ReportA,WrongsB) -> (
-        reportSymetricWrongs(WrongsAReturned,WrongsB),
+        reportSymetricWrongs(WrongsB,WrongsAReturned),
         Evaluator = Rule
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
