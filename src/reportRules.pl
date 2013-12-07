@@ -13,13 +13,22 @@ reportEvaluateFatalMistake(A,_,100) :-
 :- reportDefineRule(reportEvaluateFatalMistake).
 
 %
-% 100% des torts de A si il a ouvert une portiere en stationnent
+% 2) Véhicule en stationnement
 %
-reportEvaluate1(A,_,100) :-
-    reportIsChecked(A,c01),
+reportParking(A,B) :-
+    reportIsChecked(A,c01);
+    reportIsChecked(B,c01).
+
+%
+%   1) Portiere
+%
+% Il faut aussi prendre en compte le cas de la portière. Dans ce cas, il a tous les torts.
+%
+reportRule21(A,B,100) :-
+    reportParking(A,B),
     reportIsChecked(A,c02).
 
-:- reportDefineRule(reportEvaluate1).
+:- reportDefineRule(reportRule21).
 
 %
 % 1) Véhicules circulant sur la même chaussée
