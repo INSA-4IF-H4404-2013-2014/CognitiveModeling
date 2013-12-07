@@ -49,27 +49,31 @@ testCase('testCase 9',A,B,100,1,reportRule21) :-
     reportCreate(A),
     reportCheck(A,c01,B).
 %
-% Proceed all test cases
+% Exec a specific test case
 %
-testCase([]).
-testCase([CaseName|CaseNames]) :-
+testExecCase(CaseName) :-
     testCase(CaseName,A,B,WrongsA,1,TheoricRule) ->
     (
         reportEvaluateWrongs(A,B,WrongsAC,TriggeredRule) ->
         (
-            (
-                (WrongsAC == WrongsA, TheoricRule == TriggeredRule) -> (
-                    testOk(CaseName)
-                ); (
-                    write('# rule that has been targeted: '),
-                    write(TriggeredRule),
-                    write('\n'),
-                    testFail(CaseName)
-                )
-            ),
-            testCase(CaseNames)
+            (WrongsAC == WrongsA, TheoricRule == TriggeredRule) -> (
+                testOk(CaseName)
+            ); (
+                write('# rule that has been triggered: '),
+                write(TriggeredRule),
+                write('\n'),
+                testFail(CaseName)
+            )
         )
     ).
+
+%
+% Proceed all test cases
+%
+testCase([]).
+testCase([CaseName|CaseNames]) :-
+    testExecCase(CaseName),
+    testCase(CaseNames).
 
 testCases :-
     findall(X,testCase(X,_,_,_,1,_),CaseNames),
