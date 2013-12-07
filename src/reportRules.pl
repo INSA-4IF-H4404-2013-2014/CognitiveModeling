@@ -20,15 +20,43 @@ reportParking(A,B) :-
     reportIsChecked(B,c01).
 
 %
-%   1) Portiere
+% Si le véhicule en stationnement était en stationnement (ou arrêt) régulier, il n'a aucun tort (0%). Il en est de même si
+% il était en stationnement irrégulier en agglomération le long d'un trottoir.
+%
+reportRule21(A,B,0) :-
+    reportParking(A,B),
+    not(reportRule24(A,B,_)),
+    not(reportIsChecked(A,c20)),
+    not(reportIsChecked(A,c21)).
+
+
+%
+% En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long d'un trottoir,
+% alors il a 25% des torts.
+%
+reportRule22(A,B,25) :-
+    reportParking(A,B),
+    not(reportRule24(A,B,_)),
+    reportIsChecked(A,c20),
+    not(reportIsChecked(A,c21)).
+
+%
+% Dans les autres cas - stationnement (ou arrêt) irrégulier hors agglomération- les torts sont partagés 50 %, 50%.
+%
+reportRule23(A,B,50) :-
+    reportParking(A,B),
+    not(reportRule24(A,B,_)),
+    reportIsChecked(A,c21).
+
 %
 % Il faut aussi prendre en compte le cas de la portière. Dans ce cas, il a tous les torts.
 %
-reportRule21(A,B,100) :-
+reportRule24(A,B,100) :-
     reportParking(A,B),
     reportIsChecked(A,c02).
 
-:- reportDefineRule(reportRule21).
+:- reportDefineRule(reportRule24).
+
 
 %
 % 1) Véhicules circulant sur la même chaussée
