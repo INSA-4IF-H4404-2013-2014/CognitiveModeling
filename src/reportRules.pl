@@ -44,6 +44,8 @@ reportRule22(A,B,25) :-
     reportIsChecked(A,c20),
     not(reportIsChecked(A,c21)).
 
+:- reportDefineRule(reportRule22).
+
 %
 % Dans les autres cas - stationnement (ou arrêt) irrégulier hors agglomération- les torts sont partagés 50 %, 50%.
 %

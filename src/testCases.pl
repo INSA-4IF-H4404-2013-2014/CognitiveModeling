@@ -109,6 +109,11 @@ testCase('testCase 20',A,B,100,1,reportRule21) :-
     reportCheck(G0,c12,G1),
     reportCheck(G1,c13,A).
 
+testCase('testCase 21',A,B,25,1,reportRule22) :-
+    reportCreate(B),
+    reportCheck(B,c01,G0),
+    reportCheck(G0,c20,A).
+
 %
 % Exec a specific test case
 %
