@@ -11,22 +11,30 @@
 testCase('testCase 1',G,G,50,1) :-
     reportCreate(G).
 
-testCase('testCase 2',A,B,100,0) :-
+testCase('testCase 2',A,B,0,1) :-
     reportCreate(G0),
     reportCheck(G0,c11,A),
     reportCheck(A,c08,B).
 
 testCase([]).
 testCase([CaseName|CaseNames]) :-
-    testCase(CaseName,A,B,WrongsA,1),
+    testCase(CaseName,A,B,WrongsA,1) ->
     (
-        reportEvaluateWrongs(A,B,WrongsA,_) -> (
-            testOk(CaseName)
-        ); (
-            testFail(CaseName)
+        reportEvaluateWrongs(A,B,WrongsAC,TriggeredRule) ->
+        (
+            (
+                (WrongsAC == WrongsA) -> (
+                    testOk(CaseName)
+                ); (
+                    write('# rule that has been targeted: '),
+                    write(TriggeredRule),
+                    write('\n'),
+                    testFail(CaseName)
+                )
+            ),
+            testCase(CaseNames)
         )
-    ),
-    testCase(CaseNames).
+    ).
 
 testCases :-
     findall(X,testCase(X,_,_,_,1),CaseNames),
