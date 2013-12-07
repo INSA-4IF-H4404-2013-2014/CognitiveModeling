@@ -1,6 +1,0 @@
-20 stationnement irregulier en agglomeration pas le long du trottoir
-21 stationnement irregulier hors agglomeration 
-22 ligne continue franchie
-23 virait a droite avec fleche orange clignotante
-24 axe median franchi
-25 sens different, pas d axe median determine
