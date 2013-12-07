@@ -105,8 +105,7 @@ reportRule122(A,B,75) :-
     reportSamePath(A,B),
     (
         reportIsChecked(B,c03);
-        reportIsChecked(B,c05);
-        reportIsChecked(B,c14)
+        reportIsChecked(B,c05)
     ).
 
 :- reportDefineRule(reportRule122).
