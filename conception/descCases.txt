@@ -1,0 +1,25 @@
+1 voiture stat ou a l arret
+2 quitte un stat ou ouvre portiere
+3 prendre un stat
+4 sortait d'un parking, voie privee, chemin de terre
+5 entrait parking, voie privee, chemin de terre
+6 engageait sur place a sens giratoire
+7 roulait sur place a sens giratoire
+8 heurait a l arriere, meme file, meme sens
+9 roulait meme sens, autre file
+10 changeait de file
+11 doublait
+12 virait a droite
+13 virait a gauche
+14 reculait
+15 empietait sur une voie reservee a la circu en sens inverse
+16 venait de droite (carrefour)
+17 n a pas observe un signal de prio ou feu rouge
+
+
+20 stationnement irregulier en agglomeration pas le long du trottoir
+21 stationnement irregulier hors agglomeration 
+22 ligne continue franchie
+23 virait a droite avec fleche orange clignotante
+24 axe median franchi
+25 sens different, pas d axe median determine

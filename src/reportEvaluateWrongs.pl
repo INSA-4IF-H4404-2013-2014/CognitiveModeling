@@ -37,18 +37,23 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsA,Evaluator) :-
     reportListRules(Rules),
     reportEvaluateWrongs(ReportA,ReportB,WrongsA,Evaluator,Rules).
 
-reportEvaluateWrongs(_,_,_,_,[]) :- fail.
+%
+% By default, A and B are 50/50
+%
+reportEvaluateWrongs(_,_,50,undefined,[]).
+
 reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     call(Rule,ReportA,ReportB,WrongsA) -> (
-        Evaluator = Rule,
         call(Rule,ReportB,ReportA,WrongsA) -> (
+            Evaluator = Rule,
             WrongsAReturned = 50
         ); (
+            Evaluator = Rule,
             WrongsAReturned = WrongsA
         )
     );
     call(Rule,ReportB,ReportA,WrongsB) -> (
-        reportSymetricWrongs(WrongsAReturned,WrongsB),
+        reportSymetricWrongs(WrongsB,WrongsAReturned),
         Evaluator = Rule
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).

@@ -1,12 +1,13 @@
 4 ET 5
 8 ET 9
 12 ET 13
-1 ET case qui n'est pas 2
+1 ET case qui n'est pas 2 => decoche 1
 (6 OU 16) ET 7
 (20 OU 21) ET not(1)
 25 ET (8 OU 9)
 23 ET 13
 
+A8 et B8
 A9 ET B9
 A16 ET B16
 A1 ET B1 ET aucune autre case
