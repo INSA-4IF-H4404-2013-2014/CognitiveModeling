@@ -8,7 +8,10 @@
 %
 % list all test cases with expected wrongs for A
 %
-testCase('testCase 1',A,B,100,0) :-
+testCase('testCase 1',G,G,50,1) :-
+    reportCreate(G).
+
+testCase('testCase 2',A,B,100,0) :-
     reportCreate(G0),
     reportCheck(G0,c11,A),
     reportCheck(A,c08,B).
