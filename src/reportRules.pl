@@ -29,7 +29,8 @@ reportRule21(A,B,0) :-
     not(reportRule24(A,B,_)),
     not(reportIsChecked(A,c20)),
     not(reportIsChecked(A,c21)),
-    not(reportRule112(A,B,_)).
+    not(reportRule112(A,B,_)),
+    not(reportRule24(B,A,_)).
 
 :- reportDefineRule(reportRule21).
 

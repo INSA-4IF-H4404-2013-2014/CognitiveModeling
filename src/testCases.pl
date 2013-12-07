@@ -48,6 +48,13 @@ testCase('testCase 8',A,B,0,1,reportRule24) :-
 testCase('testCase 9',A,B,100,1,reportRule21) :-
     reportCreate(A),
     reportCheck(A,c01,B).
+
+testCase('testCase 10',B,A,0,1,reportRule24) :-
+    reportCreate(G0),
+    reportCheck(G0,c01,G1),
+    reportCheck(G1,c21,B),
+    reportCheck(G1,c02,A).
+
 %
 % Exec a specific test case
 %

@@ -44,10 +44,11 @@ reportEvaluateWrongs(_,_,50,undefined,[]).
 
 reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     call(Rule,ReportA,ReportB,WrongsA) -> (
-        Evaluator = Rule,
         call(Rule,ReportB,ReportA,WrongsA) -> (
+            Evaluator = Rule,
             WrongsAReturned = 50
         ); (
+            Evaluator = Rule,
             WrongsAReturned = WrongsA
         )
     );
