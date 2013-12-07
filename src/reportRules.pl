@@ -7,8 +7,8 @@
 %
 reportEvaluateFatalMistake(A,_,100) :-
     reportIsChecked(A,c04);
-    reportIsChecked(A,c07);
-    reportIsChecked(A,c14).
+    reportIsChecked(A,c14);
+    reportIsChecked(A,c17).
 
 :- reportDefineRule(reportEvaluateFatalMistake).
 
