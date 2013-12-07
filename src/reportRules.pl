@@ -118,3 +118,32 @@ reportRule123(A,B,100) :-
 
 :- reportDefineRule(reportRule123).
 
+%
+%   3) véhicules circulant en sens inverse
+%
+% Sinon, et le croquis est là pour confirmer, c'est un accident provoqué par des véhicules circulant en sens inverse.
+%
+reportReversedWays(A,B) :-
+    not(reportDifferentPath(A,B)),
+    not(reportSamePath(A,B)).
+
+%
+% Commençons par cette dernière sous-catégorie, qui est la plus simple à traiter : Si l'un des conducteurs a coché la
+% case 15 : "empiétait sur la partie de chaussée réservée à la circulation en sens inverse" ou s’il existe des preuves
+% évidentes (sur le croquis) qu'il a franchi l'axe médian de la chaussée, il a 100% de torts. Si les deux l'ont coché,
+% ils se partagent les torts 50%, 50%. Si les véhicules roulaient en sens inverse et que la position des véhicules par
+% rapport à l'axe médian ne peut pas être déterminée explicitement, c'est théoriquement du 50%, 50%.
+%
+reportRule131(A,B,100) :-
+    reportReversedWays(A,B),
+    reportIsChecked(A,c15).
+
+:- reportDefineRule(reportRule131).
+
+reportRule132(A,B,50) :-
+    reportReversedWays(A,B),
+    not(reportRule131(A,B,_)).
+
+% don't active it yet !%
+%:- reportDefineRule(reportRule132).
+
