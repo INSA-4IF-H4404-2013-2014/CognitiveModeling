@@ -1,5 +1,6 @@
 
 :-[reportEvaluateWrongs].
+:-[reportRules].
 :-[testUtils].
 
 testReportEvaluateFatalMistake :-
