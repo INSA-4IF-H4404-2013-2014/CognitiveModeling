@@ -72,7 +72,7 @@ testCase('testCase 13',A,B,100,1,reportEvaluateFatalMistake) :-
     reportCheck(G0,c14,A).
 
 % TODO: Explication ??
-testCase('testCase 14',A,B,50,1,undefined) :-
+testCase('testCase 14',A,B,50,0,undefined) :-
     reportCreate(G0),
     reportCheck(G0,c03,B),
     reportCheck(B,c02,A).
@@ -81,6 +81,10 @@ testCase('testCase 15',A,B,0,1,reportRule111) :-
     reportCreate(G0),
     reportCheck(G0,c08,A),
     reportCheck(G0,c10,B).
+
+testCase('testCase 16',A,B,100,1,reportRule3) :-
+    reportCreate(B),
+    reportCheck(B,c02,A).
 
 %
 % Exec a specific test case

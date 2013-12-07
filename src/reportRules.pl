@@ -187,3 +187,11 @@ reportRule132(A,B,50) :-
 % don't active it yet !%
 %:- reportDefineRule(reportRule132).
 
+%
+% 3) quitte un stat
+%
+reportRule3(A,_,100) :-
+    reportIsChecked(A,c02).
+
+:- reportDefineRule(reportRule3).
+
