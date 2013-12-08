@@ -1,5 +1,6 @@
 
 :- [report].
+:- [reportPrune].
 
 
 %
@@ -66,4 +67,11 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
         )
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
+
+%
+% Prunes and evaluate wrongs
+%
+reportEvaluate(ReportA,ReportB,WrongsA,Evaluator) :-
+    reportPrune(ReportA,ReportB,NewReportA,NewReportB) ->
+    reportEvaluateWrongs(NewReportA,NewReportB,WrongsA,Evaluator).
 

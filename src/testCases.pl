@@ -131,7 +131,7 @@ testCase('testCase 22',A,B,-1,1,reportAreCorruptedBoth8) :-
 testExecCase(CaseName) :-
     testCase(CaseName,A,B,WrongsA,1,TheoricRule) ->
     (
-        reportEvaluateWrongs(A,B,WrongsAC,TriggeredRule) ->
+        reportEvaluate(A,B,WrongsAC,TriggeredRule) ->
         (
             (WrongsAC == WrongsA, TheoricRule == TriggeredRule) -> (
                 testOk(CaseName)
