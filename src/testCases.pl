@@ -4,7 +4,13 @@
 
 
 %
-% testCase(Name,A,B,WrongsA,Active)
+% testCase(Name,A,B,WrongsA,Active,TriggeredRule)
+%   <Name> the test case's name
+%   <A> the car A's report
+%   <B> the car B's report
+%   <WrongsA> the car A's expected wrongs
+%   <Active> enable (Active=1) or disable (Active=2) the test case
+%   <TriggeredRule>> the rule name that is suposed to be triggered
 %
 % list all test cases with expected wrongs for A
 %
