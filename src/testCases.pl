@@ -124,6 +124,12 @@ testCase('teacher\'s test case 22',A,B,-1,1,reportAreCorruptedBoth8) :-
     reportCreate(G0),
     reportCheck(G0,c08,A),
     A = B.
+	
+testCase('test rule 23', A, B, 50, 1, reportRule23) :-
+	reportCreate(G0),
+	reportCheck(G0, c01, G1),
+	reportCheck(G1, c21, A),
+	reportCreate(B).
 
 %
 % Exec a specific test case
