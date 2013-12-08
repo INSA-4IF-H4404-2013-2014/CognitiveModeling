@@ -1,6 +1,7 @@
 
 :-[reportEvaluateWrongs].
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Corrupted forms
 %
@@ -57,6 +58,7 @@ reportAreCorruptedParking(A,B,-1) :-
 
 :- reportDefineRule(reportAreCorruptedParking).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Fautes grave%
 %
@@ -67,6 +69,7 @@ reportEvaluateFatalMistake(A,_,100) :-
 
 :- reportDefineRule(reportEvaluateFatalMistake).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 2) Véhicule en stationnement
 %
@@ -119,6 +122,7 @@ reportRule24(A,B,100) :-
 :- reportDefineRule(reportRule24).
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 1) Véhicules circulant sur la même chaussée
 %
@@ -244,6 +248,7 @@ reportRule132(A,B,50) :-
 % don't active it yet !%
 %:- reportDefineRule(reportRule132).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % 3) quitte un stat
 %
