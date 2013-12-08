@@ -1,6 +1,61 @@
 
 :-[reportEvaluateWrongs].
 
+%
+% Corrupted forms
+%
+reportAreCorruptedBoth9(A,B,-1) :-
+    reportIsChecked(A,c09),
+    reportIsChecked(B,c09).
+
+% testCase 3 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorruptedBoth9).
+
+reportAreCorruptedBoth16(A,B,-1) :-
+    reportIsChecked(A,c16),
+    reportIsChecked(B,c16).
+
+:- reportDefineRule(reportAreCorruptedBoth16).
+
+reportAreCorrupted4and5(A,_,-1) :-
+    reportIsChecked(A,c04),
+    reportIsChecked(A,c05).
+
+:- reportDefineRule(reportAreCorrupted4and5).
+
+reportAreCorrupted6and7(A,_,-1) :-
+    reportIsChecked(A,c06),
+    reportIsChecked(A,c07).
+
+% testCase 17 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorrupted6and7).
+
+reportAreCorrupted8and9(A,_,-1) :-
+    reportIsChecked(A,c08),
+    reportIsChecked(A,c09).
+
+:- reportDefineRule(reportAreCorrupted8and9).
+
+reportAreCorrupted12and13(A,_,-1) :-
+    reportIsChecked(A,c12),
+    reportIsChecked(A,c13).
+
+% testCase 20 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorrupted12and13).
+
+reportAreCorrupted7and16(A,_,-1) :-
+    reportIsChecked(A,c07),
+    reportIsChecked(A,c16).
+
+:- reportDefineRule(reportAreCorrupted7and16).
+
+reportAreCorruptedParking(A,B,-1) :-
+    reportIsChecked(A,c01),
+    reportIsChecked(B,c01),
+    not(reportIsChecked(A,c02)),
+    not(reportIsChecked(B,c02)).
+
+:- reportDefineRule(reportAreCorruptedParking).
 
 %
 % Fautes grave%

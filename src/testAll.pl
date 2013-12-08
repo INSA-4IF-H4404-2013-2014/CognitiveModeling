@@ -2,7 +2,6 @@
 :- [main].
 :- [testReport].
 :- [testReportPrune].
-:- [testReportVerify].
 :- [testReportEvaluateWrongs].
 :- [testCases].
 
@@ -12,7 +11,6 @@
 testAll :-
     testReport,
     testReportPrune,
-    testReportVerify,
     testReportEvaluateWrongs,
     testCases.
 

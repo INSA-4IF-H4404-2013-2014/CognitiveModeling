@@ -44,6 +44,10 @@ reportEvaluateWrongs(_,_,50,undefined,[]).
 
 reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     call(Rule,ReportA,ReportB,WrongsA) -> (
+        (WrongsA == -1) -> (
+            Evaluator = Rule,
+            WrongsAReturned = -1
+        );
         call(Rule,ReportB,ReportA,WrongsA) -> (
             Evaluator = Rule,
             WrongsAReturned = 50
@@ -53,8 +57,13 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
         )
     );
     call(Rule,ReportB,ReportA,WrongsB) -> (
-        reportSymetricWrongs(WrongsB,WrongsAReturned),
-        Evaluator = Rule
+        (WrongsB == -1) -> (
+            Evaluator = Rule,
+            WrongsAReturned = -1
+        ); (
+            reportSymetricWrongs(WrongsB,WrongsAReturned),
+            Evaluator = Rule
+        )
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
 
