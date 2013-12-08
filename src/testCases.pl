@@ -134,8 +134,29 @@ testCase('test rule 23', A, B, 50, 1, reportRule23) :-
 testCase('test report corrupted - both 16', A, B, -1, 1, reportAreCorruptedBoth16) :-
 	reportCreate(G0),
 	reportCheck(G0, c16, A),
-	A = B.
+	reportCheck(A, c02, B).
 
+testCase('test report corrupted - 4 and 5', A, B, -1, 1, reportAreCorrupted4and5) :-
+	reportCreate(G0),
+	reportCheck(G0, c04, G1),
+	reportCheck(G1, c05, A),
+	reportCreate(G2),
+	reportCheck(G2, c14, B).
+	
+testCase('test report corrupted - 8 and 9', A, B, -1, 1, reportAreCorrupted8and9) :-
+	reportCreate(G0),
+	reportCheck(G0, c08, G1),
+	reportCheck(G1, c09, A),
+	reportCreate(G2),
+	reportCheck(G2, c14, B).
+	
+testCase('test report corrupted - 16 and 7', A, B, -1, 1, reportAreCorrupted7and16) :-
+	reportCreate(G0),
+	reportCheck(G0, c16, G1),
+	reportCheck(G1, c07, A),
+	reportCreate(G2),
+	reportCheck(G2, c14, B).
+	
 %
 % Exec a specific test case
 %
