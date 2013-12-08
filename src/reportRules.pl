@@ -119,7 +119,10 @@ reportRule22(A,B,25) :-
 reportRule23(A,B,50) :-
     reportParking(A,B),
     not(reportRule24(A,B,_)),
+    not(reportRule24(B,A,_)),
     reportIsChecked(A,c21).
+	
+:- reportDefineRule(reportRule23).
 
 %
 % Il faut aussi prendre en compte le cas de la portière. Dans ce cas, il a tous les torts.
@@ -204,7 +207,9 @@ reportRule121(A,B,0) :-
         reportIsChecked(B,c04);
         reportIsChecked(B,c14)
     ).
-
+%04 AND 14 ARE FATAL MISTAKES !
+	
+	
 :- reportDefineRule(reportRule121).
 
 %
