@@ -5,6 +5,12 @@
 %
 % Corrupted forms
 %
+reportAreCorruptedBoth8(A,B,-1) :-
+    reportIsChecked(A,c08),
+    reportIsChecked(B,c08).
+
+:- reportDefineRule(reportAreCorruptedBoth8).
+
 reportAreCorruptedBoth9(A,B,-1) :-
     reportIsChecked(A,c09),
     reportIsChecked(B,c09).
@@ -31,6 +37,9 @@ reportAreCorrupted6and7(A,_,-1) :-
 % testCase 17 is not supposed to be corrupted
 %:- reportDefineRule(reportAreCorrupted6and7).
 
+%
+% Si un conducteur a coché les cases 12 et 13, le constat est incohérent. De même s’il a coché les cases 8 et 9.
+%
 reportAreCorrupted8and9(A,_,-1) :-
     reportIsChecked(A,c08),
     reportIsChecked(A,c09).

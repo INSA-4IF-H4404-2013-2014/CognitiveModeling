@@ -120,7 +120,7 @@ testCase('testCase 21',A,B,25,1,reportRule22) :-
     reportCheck(B,c01,G0),
     reportCheck(G0,c20,A).
 
-testCase('testCase 22',A,B,-1,0,reportRule22) :-
+testCase('testCase 22',A,B,-1,1,reportAreCorruptedBoth8) :-
     reportCreate(G0),
     reportCheck(G0,c08,A),
     A = B.
