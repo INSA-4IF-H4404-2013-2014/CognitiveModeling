@@ -30,7 +30,11 @@ reportUI :-
             (convert_str_char("o",C)) -> (
                 write('OUI\n')
             ); (
-                write('NON\n')
+                write('NON\n'),
+                write('\n'),
+                write('Regles declancheuse : '),
+                write(Evaluator),
+                write('\n')
             )
         )
     ).
