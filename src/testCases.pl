@@ -130,6 +130,11 @@ testCase('test rule 23', A, B, 50, 1, reportRule23) :-
 	reportCheck(G0, c01, G1),
 	reportCheck(G1, c21, A),
 	reportCreate(B).
+	
+testCase('test report corrupted - both 16', A, B, -1, 1, reportAreCorruptedBoth16) :-
+	reportCreate(G0),
+	reportCheck(G0, c16, A),
+	A = B.
 
 %
 % Exec a specific test case
