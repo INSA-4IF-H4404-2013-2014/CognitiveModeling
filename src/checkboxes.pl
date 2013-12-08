@@ -24,7 +24,7 @@ checkboxTitle(c21, 'était en stationnement irregulier hors agglomeration').
 checkboxTitle(c22, 'avait franchi la ligne continue').
 checkboxTitle(c23, 'virait a droite malgre une fleche orange clignotante').
 checkboxTitle(c24, 'avait franchi l\'axe median').
-checkboxTitle(c23, 'roulait en sens inverse, le franchissement de l\'axe median n\'est pas determine').
+checkboxTitle(c25, 'roulait en sens inverse, le franchissement de l\'axe median n\'est pas determine').
 
 %
 % lists all checkboxes's names
