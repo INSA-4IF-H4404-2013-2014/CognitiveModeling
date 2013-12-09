@@ -157,15 +157,20 @@ testCase('test report corrupted - 16 and 7', A, B, -1, 1, reportAreCorrupted7and
 	reportCreate(G2),
 	reportCheck(G2, c14, B).
 	
-testCase('test reportRule121', A, B, 0, 1, reportRule121) :-
+testCase('test rule 121', A, B, 0, 1, reportRule121) :-
 	reportCreate(G0),
 	reportCheck(G0, c08, A),
 	reportCheck(G0, c02, B).
 	
-testCase('test reportRule32',A,B,50,1,reportRule32) :-
+testCase('test rule 32',A,B,50,1,reportRule32) :-
     reportCreate(G0),
     reportCheck(G0,c02,A),
 	reportCheck(G0,c02,B).
+	
+testCase('test rule 110',A,B,50,1,reportRule110) :-
+	reportCreate(G0),
+    reportCheck(G0,c10,A),
+	reportCheck(G0,c10,B).
 	
 %
 % Exec a specific test case

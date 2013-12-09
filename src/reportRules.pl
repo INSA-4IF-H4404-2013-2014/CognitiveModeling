@@ -154,13 +154,22 @@ reportDifferentPath(A,B) :-
 %
 % un des 2 conducteurs a coché 10 : il a 100% de tort
 %
-% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% de tort chacun
-%
 reportRule111(A,B,100) :-
     reportDifferentPath(A,B),
-    reportIsChecked(A,c10).
+    reportIsChecked(A,c10),
+	not(reportIsChecked(B,c10)).
 
 :- reportDefineRule(reportRule111).
+
+%
+% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% de tort chacun
+%
+reportRule110(A,B,50) :-
+	reportDifferentPath(A,B),
+	reportIsChecked(A,c10),
+	reportIsChecked(B,c10).
+	
+:- reportDefineRule(reportRule110).
 
 %
 % aucun n'a coché la case 10 : soit ils se sont accrochés en roulant parallèlement et dans ce cas ils ont 50% chacun, soit
