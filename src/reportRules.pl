@@ -202,12 +202,7 @@ reportSamePath(A,B) :-
 %
 reportRule121(A,B,0) :-
     reportSamePath(A,B),
-    (
-        reportIsChecked(B,c02);
-        reportIsChecked(B,c04);
-        reportIsChecked(B,c14)
-    ).
-%04 AND 14 ARE FATAL MISTAKES !
+	reportIsChecked(B,c02).
 	
 	
 :- reportDefineRule(reportRule121).
@@ -266,8 +261,19 @@ reportRule132(A,B,50) :-
 %
 % 3) quitte un stat
 %
-reportRule3(A,_,100) :-
-    reportIsChecked(A,c02).
+% Seul A quitte un stationnement
+%
+reportRule31(A,B,100) :-
+    reportIsChecked(A,c02),
+	not(reportIsChecked(B,c02)).
 
-:- reportDefineRule(reportRule3).
+:- reportDefineRule(reportRule31).
+%
+% A et B quittent un stationnement
+%
+reportRule32(A,B,50) :-
+    reportIsChecked(A,c02),
+	reportIsChecked(B,c02).
+
+:- reportDefineRule(reportRule32).
 

@@ -88,7 +88,7 @@ testCase('teacher\'s test case 15',A,B,0,1,reportRule111) :-
     reportCheck(G0,c08,A),
     reportCheck(G0,c10,B).
 
-testCase('teacher\'s test case 16',A,B,100,1,reportRule3) :-
+testCase('teacher\'s test case 16',A,B,100,1,reportRule31) :-
     reportCreate(B),
     reportCheck(B,c02,A).
 
@@ -161,6 +161,11 @@ testCase('test reportRule121', A, B, 0, 1, reportRule121) :-
 	reportCreate(G0),
 	reportCheck(G0, c08, A),
 	reportCheck(G0, c02, B).
+	
+testCase('test reportRule32',A,B,50,1,reportRule32) :-
+    reportCreate(G0),
+    reportCheck(G0,c02,A),
+	reportCheck(G0,c02,B).
 	
 %
 % Exec a specific test case
