@@ -69,9 +69,23 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
 
 %
+% Evaluates priority wrongs
+% i.e: wrongs that have to be checked before regular ones.
+%
+:- dynamic reportEvaluateWrongsPriorDB/3.
+:- retractall(reportEvaluateWrongsPriorDB(_, _, _)).
+reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, Evaluator) :-
+	reportEvaluateWrongsPriorDB(NewReportA, NewReportB, WrongsA) ->
+		Evaluator = exception ;
+		false.
+
+%
 % Prunes and evaluate wrongs
 %
 reportEvaluate(ReportA,ReportB,WrongsA,Evaluator) :-
     reportPrune(ReportA,ReportB,NewReportA,NewReportB) ->
-    reportEvaluateWrongs(NewReportA,NewReportB,WrongsA,Evaluator).
+	(
+		reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, Evaluator) ;
+		reportEvaluateWrongs(NewReportA,NewReportB,WrongsA,Evaluator)
+	).
 
