@@ -22,7 +22,7 @@ checkboxTitle(c17, 'n\'avait pas observe un signal de priorite ou un feu rouge')
 checkboxTitle(c20, 'était en stationnement irregulier en agglomeration, pas le long d\'un trottoir').
 checkboxTitle(c21, 'était en stationnement irregulier hors agglomeration').
 checkboxTitle(c22, 'avait franchi la ligne continue').
-checkboxTitle(c23, 'virait a droite malgre une fleche orange clignotante').
+checkboxTitle(c23, 'fleche orange clignotante').
 checkboxTitle(c24, 'avait franchi l\'axe median').
 checkboxTitle(c25, 'roulait en sens inverse').
 
