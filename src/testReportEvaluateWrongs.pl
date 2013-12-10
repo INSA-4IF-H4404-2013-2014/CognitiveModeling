@@ -24,7 +24,28 @@ testReportEvaluateWrongsMechanism :-
     reportEvaluateWrongs(G1,G3,100,_),
     reportEvaluateWrongs(G3,G1,0,_).
 
+testReportEvaluateWrongsPrior :-
+	% Create report for A
+	reportCreate(G0),
+	reportCheck(G0, c07, G1),
+	reportCheck(G1, c08, G2),
+
+	% Create report for B
+	reportCreate(H0),
+	reportCheck(H0, c02, H1),
+	reportCheck(H1, c01, H2),
+
+	% Various checks
+	assert(reportEvaluateWrongsPriorDB(G2, H2, 75)),
+	reportEvaluateWrongsPrior(G2, H2, 75, exception),
+	reportEvaluate(G2, H2, 75, exception),
+	retract(reportEvaluateWrongsPriorDB(G2, H2, 75)),
+	not(reportEvaluate(G2, H2, 75, _)),
+	assert(reportEvaluateWrongsPriorDB(G2, H2, 54)),
+	reportEvaluate(H2, G2, 46, exception).
+
 testReportEvaluateWrongs :-
     test(testReportSymetricWrongs),
-    test(testReportEvaluateWrongsMechanism).
+    test(testReportEvaluateWrongsMechanism),
+    test(testReportEvaluateWrongsPrior).
 
