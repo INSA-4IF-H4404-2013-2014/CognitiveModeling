@@ -74,8 +74,7 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
 %
 :- dynamic reportEvaluateWrongsPriorDB/3.
 :- retractall(reportEvaluateWrongsPriorDB(_, _, _)).
-reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, Evaluator) :-
-	Evaluator = exception,
+reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, exception) :-
 	reportEvaluateWrongsPriorDB(NewReportA, NewReportB, WrongsA) ;
 	(
 		reportEvaluateWrongsPriorDB(NewReportB, NewReportA, WrongsB),
