@@ -332,6 +332,17 @@ reportRule43(A,_,25) :-
 %
 % Il coche la case 16 : "Venait de droite dans un carrefour" et il n'a aucun tort.
 %
+reportRule44(A,_,50) :-
+    reportIsChecked(A,c15),
+    reportIsChecked(A,c16),
+    reportIsChecked(A,c22),
+    reportIsChecked(A,c24).
+
+:- reportDefineRule(reportRule44).
+
+%
+% Il coche la case 16 : "Venait de droite dans un carrefour" et il n'a aucun tort.
+%
 reportRule45(A,_,0) :-
     reportIsChecked(A,c16).
 
