@@ -293,6 +293,18 @@ reportRule32(A,B,50) :-
 
 :- reportDefineRule(reportRule32).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%% 3:  provenant de chaussées différentes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Case 6 : "S'engageait sur une place à sens giratoire," Le conducteur qui a coché cette case 
+%(il ne doit cocher cette case que si les roues arrières de son véhicule ne sont pas encore dans le rond-point) 
+% a tous les torts car l'autre, qui roulait à l'intérieur du sens giratoire a la priorité.
 
+reportRule41(A,B,100) :-
+	reportIsChecked(A,c06),
+	reportIsChecked(B,c07).
+
+:- reportDefineRule(reportRule41).
 
 
