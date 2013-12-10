@@ -307,4 +307,12 @@ reportRule41(A,B,100) :-
 
 :- reportDefineRule(reportRule41).
 
+% Sans compter le cas du conducteur qui venait de droite et virait à droite avec une flèche orange clignotante. 
+% Il n'avait pas la priorité sur B qui passait au vert et il prend 100% de tort.
 
+reportRule42(A,_,100) :-
+	reportIsChecked(A,c12),
+	reportIsChecked(A,c16),
+	reportIsChecked(A,c23).
+	
+:- reportDefineRule(reportRule42).
