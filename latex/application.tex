@@ -5,3 +5,5 @@ hello world
 
 \section{Test unitaires}
 
+A chaque implémentation d'une règle, un test unitaire est codé : il construit un rapport avec certaines cases cochées, et on donne la règle qui doit s'exécuter.
+En cas de collision, la procédure qui exécute tous les tests s'arrête, et donne la règle qui a effectivement été utilisée : soit la nouvelle règle est redondante et est supprimée, soit la règle utilisée doit être précisée. Généralement, on lui ajoute le prédicat "not(nouvelleRegle)". 
