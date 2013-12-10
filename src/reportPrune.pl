@@ -2,7 +2,7 @@
 :- [report].
 
 %
-% Prunes the two two given report
+% Prunes the two given reports
 % TODO: Implementation
 %
 reportPrune(ReportA,ReportB,NewReportA,NewReportB) :-

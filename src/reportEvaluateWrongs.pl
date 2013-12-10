@@ -31,7 +31,7 @@ reportListRules(Rules) :-
     findall(X,reportEvaluateRules(X),Rules).
 
 %
-% Evaluate wrongs between tow car' reports, and return the evaluator
+% Evaluate wrongs between two car reports, and return the evaluator
 %
 reportEvaluateWrongs(ReportA,ReportB,WrongsA,Evaluator) :-
     reportListRules(Rules),

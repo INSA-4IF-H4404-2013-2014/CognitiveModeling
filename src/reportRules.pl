@@ -20,8 +20,8 @@ reportParking(A,B) :-
     reportIsChecked(B,c01).
 
 %
-% Si le véhicule en stationnement était en stationnement (ou arrêt) régulier, il n'a aucun tort (0%). Il en est de même si
-% il était en stationnement irrégulier en agglomération le long d'un trottoir.
+% Si le véhicule était en stationnement (ou arrêt) régulier, il n a aucun tort (0%). Il en est de même si
+% il était en stationnement irrégulier en agglomération le long d un trottoir.
 %
 reportRule21(A,B,0) :-
     reportParking(A,B),
@@ -35,8 +35,8 @@ reportRule21(A,B,0) :-
 :- reportDefineRule(reportRule21).
 
 %
-% En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long d'un trottoir,
-% alors il a 25% des torts.
+% En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long dun trottoir,
+% alors il a 25% des torts. 
 %
 reportRule22(A,B,25) :-
     reportParking(A,B),
@@ -55,7 +55,7 @@ reportRule23(A,B,50) :-
     reportIsChecked(A,c21).
 
 %
-% Il faut aussi prendre en compte le cas de la portière. Dans ce cas, il a tous les torts.
+% Il faut aussi prendre en compte le cas de la portière. Dans ce cas, celui qui l a ouverte a tous les torts.
 %
 reportRule24(A,B,100) :-
     reportParking(A,B),
@@ -72,7 +72,7 @@ reportRule24(A,B,100) :-
 %   1) même sens, files différentes (A9 or A10 or B9 or B10)
 %
 % Si un des conducteurs, ou même les deux, a coché une des cases 9 "roulait dans le même sens et sur une file différente"
-% ou 10 "changeait de file", c'est un accident "même sens, files différentes".
+% ou 10 "changeait de file", c est un accident "même sens, files différentes".
 %
 reportDifferentPath(A,B) :-
     reportIsChecked(A,c09);
@@ -81,9 +81,9 @@ reportDifferentPath(A,B) :-
     reportIsChecked(B,c10).
 
 %
-% un des 2 conducteurs a coché 10 : il a 100% de tort
+% un des 2 conducteurs a coché 10 : il a 100% des torts
 %
-% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% de tort chacun
+% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% des torts chacun
 %
 reportRule111(A,B,100) :-
     reportDifferentPath(A,B),
