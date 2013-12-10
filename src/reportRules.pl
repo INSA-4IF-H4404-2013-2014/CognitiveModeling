@@ -103,7 +103,7 @@ reportRule21(A,B,0) :-
 
 %
 % En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long dun trottoir,
-% alors il a 25% des torts. 
+% alors il a 25% des torts.
 %
 reportRule22(A,B,25) :-
     reportParking(A,B),
@@ -121,7 +121,7 @@ reportRule23(A,B,50) :-
     not(reportRule24(A,B,_)),
     not(reportRule24(B,A,_)),
     reportIsChecked(A,c21).
-	
+
 :- reportDefineRule(reportRule23).
 
 %
@@ -168,7 +168,7 @@ reportRule110(A,B,50) :-
 	reportDifferentPath(A,B),
 	reportIsChecked(A,c10),
 	reportIsChecked(B,c10).
-	
+
 :- reportDefineRule(reportRule110).
 
 %
@@ -212,8 +212,8 @@ reportSamePath(A,B) :-
 reportRule121(A,B,0) :-
     reportSamePath(A,B),
 	reportIsChecked(B,c02).
-	
-	
+
+
 :- reportDefineRule(reportRule121).
 
 %
@@ -295,10 +295,10 @@ reportRule32(A,B,50) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%%%%%% 3:  provenant de chaussées différentes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% 4:  provenant de chaussées différentes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Case 6 : "S'engageait sur une place à sens giratoire," Le conducteur qui a coché cette case 
-%(il ne doit cocher cette case que si les roues arrières de son véhicule ne sont pas encore dans le rond-point) 
+% Case 6 : "S'engageait sur une place à sens giratoire," Le conducteur qui a coché cette case
+%(il ne doit cocher cette case que si les roues arrières de son véhicule ne sont pas encore dans le rond-point)
 % a tous les torts car l'autre, qui roulait à l'intérieur du sens giratoire a la priorité.
 
 reportRule41(A,B,100) :-
@@ -307,4 +307,11 @@ reportRule41(A,B,100) :-
 
 :- reportDefineRule(reportRule41).
 
+%
+% Il coche la case 16 : "Venait de droite dans un carrefour" et il n'a aucun tort.
+%
+reportRule42(A,_,0) :-
+    reportIsChecked(A,c16).
+
+:- reportDefineRule(reportRule42).
 

@@ -125,13 +125,13 @@ testCase('teacher\'s test case 22',A,B,-1,1,reportAreCorruptedBoth8) :-
     reportCreate(G0),
     reportCheck(G0,c08,A),
     A = B.
-	
+
 testCase('test rule 23', A, B, 50, 1, reportRule23) :-
 	reportCreate(G0),
 	reportCheck(G0, c01, G1),
 	reportCheck(G1, c21, A),
 	reportCreate(B).
-	
+
 testCase('test report corrupted - both 16', A, B, -1, 1, reportAreCorruptedBoth16) :-
 	reportCreate(G0),
 	reportCheck(G0, c16, A),
@@ -143,60 +143,64 @@ testCase('test report corrupted - 4 and 5', A, B, -1, 1, reportAreCorrupted4and5
 	reportCheck(G1, c05, A),
 	reportCreate(G2),
 	reportCheck(G2, c14, B).
-	
+
 testCase('test report corrupted - 8 and 9', A, B, -1, 1, reportAreCorrupted8and9) :-
 	reportCreate(G0),
 	reportCheck(G0, c08, G1),
 	reportCheck(G1, c09, A),
 	reportCreate(G2),
 	reportCheck(G2, c14, B).
-	
+
 testCase('test report corrupted - 16 and 7', A, B, -1, 1, reportAreCorrupted7and16) :-
 	reportCreate(G0),
 	reportCheck(G0, c16, G1),
 	reportCheck(G1, c07, A),
 	reportCreate(G2),
 	reportCheck(G2, c14, B).
-	
+
 testCase('test rule 121 door', A, B, 0, 1, reportRule121) :-
 	reportCreate(G0),
 	reportCheck(G0, c08, A),
 	reportCheck(G0, c02, B).
 
-	
+
 testCase('test rule 32',A,B,50,1,reportRule32) :-
     reportCreate(G0),
     reportCheck(G0,c02,A),
 	reportCheck(G0,c02,B).
-	
+
 testCase('test rule 110',A,B,50,1,reportRule110) :-
 	reportCreate(G0),
     reportCheck(G0,c10,A),
 	reportCheck(G0,c10,B).
-	
+
 testCase('test rule 132',A,B,50,1,reportRule132) :-
 	reportCreate(G0),
 	reportCheck(G0,c25,G1),
 	reportCheck(G1,c15,A),
 	A = B.
-	
+
 testCase('test rule 131 : sketch 1',A,B,0,1,reportRule131) :-
     reportCreate(G0),
     reportCheck(G0,c25,G1),
 	reportCheck(G1,c02,A),
     reportCheck(G1,c24,B).
-	
+
 testCase('test rule 131 : sketch 2',A,B,0,1,reportRule131) :-
     reportCreate(G0),
     reportCheck(G0,c25,G1),
 	reportCheck(G1,c02,A),
     reportCheck(G1,c22,B).
-	
+
 testCase('test rule 41',A,B,100,1,reportRule41) :-
 	reportCreate(G0),
 	reportCheck(G0,c06,A),
 	reportCheck(G0,c07,B).
-	
+
+testCase('test rule 42',A,B,0,1,reportRule42) :-
+    reportCreate(B),
+    reportCheck(B,c16,A).
+
 %
 % Exec a specific test case
 %
