@@ -71,3 +71,22 @@ Alors, si les deux predicats sont verifi\'e, le noyaux en d\'eduit automatiqueme
 
 \section{Test unitaires}
 
+A chaque implémentation d'une règle, un test unitaire est codé : il construit un rapport avec certaines cases cochées, et on donne la règle qui doit s'exécuter.
+
+En cas de collision, la procédure qui exécute tous les tests s'arrête, et donne la règle qui a effectivement été utilisée : soit la nouvelle règle est redondante et est supprimée, soit l'une des règles doit être précisée. Généralement, on lui ajoute le prédicat "not(autreRegle)".
+
+Par exemple, la règle 132 qui donne les torts quand l'accident a eu lieu alors que les deux véhicules roulaient en sens inverse entrait en collision avec la règle 131 qui donne les torts si l'accident se produit parce que l'un des véhicules a franchi l'axe médian, alors que les deux roulaient en sens inverse.
+La règle 132, qui avait cette forme :
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportRule132(A,B,50) :-
+    reportReversedWays(A,B).
+\end{lstlisting}
+
+Est devenue :
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportReversedWays(A,B),
+    not(reportRule131(A,B,_)).
+\end{lstlisting}
+
