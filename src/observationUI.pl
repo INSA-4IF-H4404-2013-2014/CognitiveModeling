@@ -21,16 +21,26 @@ checkboxesPrint:-
 %
 % get/1 get a line of text
 % read/1 idem
-%
+% sub_string(+String, ?Before, ?Length, ?After, ?SubString)
+% split_string(+String, +SepChars, +PadChars, -SubStrings)
 
-textPrint(X) :- 
-    atom_codes(C,X),
-    write(C).
+writeList([]).
+writeList([T|Q]) :- 
+    write(T),
+    nl,
+    writeList(Q).
+
+
+splitText(X,L) :- 
+    atomic_list_concat(L,' ', X).
+
 
 testRead :- 
     checkboxesPrint,
     read(X),
     nl,
-    textPrint(X).
+    atom_codes(C,X),
+    splitText(C,L),
+    writeList(L).
 
 
