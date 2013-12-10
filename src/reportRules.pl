@@ -243,8 +243,8 @@ reportRule123(A,B,100) :-
 % Sinon, et le croquis est là pour confirmer, c'est un accident provoqué par des véhicules circulant en sens inverse.
 %
 reportReversedWays(A,B) :-
-    not(reportDifferentPath(A,B)),
-    not(reportSamePath(A,B)).
+   reportIsChecked(A,c25);
+   reportIsChecked(B,c25).
 
 %
 % Commençons par cette dernière sous-catégorie, qui est la plus simple à traiter : Si l'un des conducteurs a coché la
@@ -255,7 +255,8 @@ reportReversedWays(A,B) :-
 %
 reportRule131(A,B,100) :-
     reportReversedWays(A,B),
-    reportIsChecked(A,c15).
+    reportIsChecked(A,c15),
+	not(reportIsChecked(B,c15)).
 
 :- reportDefineRule(reportRule131).
 
@@ -264,7 +265,7 @@ reportRule132(A,B,50) :-
     not(reportRule131(A,B,_)).
 
 % don't active it yet !%
-%:- reportDefineRule(reportRule132).
+:- reportDefineRule(reportRule132).
 
 
 
