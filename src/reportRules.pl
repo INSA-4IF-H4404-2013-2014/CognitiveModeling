@@ -316,3 +316,14 @@ reportRule42(A,_,100) :-
 	reportIsChecked(A,c23).
 	
 :- reportDefineRule(reportRule42).
+
+% Mais si par exemple, il roulait sur une voie à double sens et qu'il empiétait sur l'axe médian,
+% ou à plus forte raison si il l'avait franchi alors il a droit à 25% des torts. 
+
+reportRule43(A,_,25) :-
+	reportIsChecked(A,c15),
+	reportIsChecked(A,c16),
+	reportIsChecked(A,c24),
+	not(reportIsChecked(A,c22)).
+
+:- reportDefineRule(reportRule43).
