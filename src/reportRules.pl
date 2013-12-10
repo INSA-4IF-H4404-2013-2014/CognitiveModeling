@@ -69,7 +69,7 @@ reportAreCorruptedParking(A,B,-1) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Fautes grave%
+%%%%%%%%%%% 1: Fautes graves%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 reportEvaluateFatalMistake(A,_,100) :-
     reportIsChecked(A,c04);
@@ -80,15 +80,15 @@ reportEvaluateFatalMistake(A,_,100) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% 2) Véhicule en stationnement
+%%%%%%%%%%% 2: Véhicule en stationnement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 reportParking(A,B) :-
     reportIsChecked(A,c01);
     reportIsChecked(B,c01).
 
 %
-% Si le véhicule en stationnement était en stationnement (ou arrêt) régulier, il n'a aucun tort (0%). Il en est de même si
-% il était en stationnement irrégulier en agglomération le long d'un trottoir.
+% Si le véhicule était en stationnement (ou arrêt) régulier, il n a aucun tort (0%). Il en est de même si
+% il était en stationnement irrégulier en agglomération le long d un trottoir.
 %
 reportRule21(A,B,0) :-
     reportParking(A,B),
@@ -102,8 +102,8 @@ reportRule21(A,B,0) :-
 :- reportDefineRule(reportRule21).
 
 %
-% En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long d'un trottoir,
-% alors il a 25% des torts.
+% En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long dun trottoir,
+% alors il a 25% des torts. 
 %
 reportRule22(A,B,25) :-
     reportParking(A,B),
@@ -125,7 +125,7 @@ reportRule23(A,B,50) :-
 :- reportDefineRule(reportRule23).
 
 %
-% Il faut aussi prendre en compte le cas de la portière. Dans ce cas, il a tous les torts.
+% Il faut aussi prendre en compte le cas de la portière. Dans ce cas, celui qui l a ouverte a tous les torts.
 %
 reportRule24(A,B,100) :-
     reportParking(A,B),
@@ -134,16 +134,16 @@ reportRule24(A,B,100) :-
 :- reportDefineRule(reportRule24).
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% 1) Véhicules circulant sur la même chaussée
+%%%% Véhicules circulant sur la même chaussée %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-%
-%   1) même sens, files différentes (A9 or A10 or B9 or B10)
+%%%%%% 5:  même sens, files différentes (A9 or A10 or B9 or B10) %%%%%%%%%%
 %
 % Si un des conducteurs, ou même les deux, a coché une des cases 9 "roulait dans le même sens et sur une file différente"
-% ou 10 "changeait de file", c'est un accident "même sens, files différentes".
+% ou 10 "changeait de file", c est un accident "même sens, files différentes".
 %
 reportDifferentPath(A,B) :-
     reportIsChecked(A,c09);
@@ -152,7 +152,7 @@ reportDifferentPath(A,B) :-
     reportIsChecked(B,c10).
 
 %
-% un des 2 conducteurs a coché 10 : il a 100% de tort
+% un des 2 conducteurs a coché 10 : il a 100% des torts
 %
 reportRule111(A,B,100) :-
     reportDifferentPath(A,B),
@@ -192,8 +192,8 @@ reportRule113(A,B,50) :-
 
 :- reportDefineRule(reportRule113).
 
-%
-%   2) même sens, même file (A8 ^ !B1 ^ !B10)
+
+%%%%%% 7: même sens, même file (A8 ^ !B1 ^ !B10)  %%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Si un des conducteurs a coché la case 8 "heurtait l'arrière de l'autre véhicule qui roulait dans le même sens et sur
 % la même file"  et que l'autre n'a coché  ni 1, ni 10, c'est évidemment un cas de la sous-catégorie "même sens, même file".
@@ -237,8 +237,8 @@ reportRule123(A,B,100) :-
 
 :- reportDefineRule(reportRule123).
 
-%
-%   3) véhicules circulant en sens inverse
+
+%%%%%% 6: véhicules circulant en sens inverse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Sinon, et le croquis est là pour confirmer, c'est un accident provoqué par des véhicules circulant en sens inverse.
 %
@@ -266,9 +266,11 @@ reportRule132(A,B,50) :-
 % don't active it yet !%
 %:- reportDefineRule(reportRule132).
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% 3) quitte un stat
+%%%%%% 3:  quitte un stat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Seul A quitte un stationnement
 %
@@ -285,4 +287,7 @@ reportRule32(A,B,50) :-
 	reportIsChecked(B,c02).
 
 :- reportDefineRule(reportRule32).
+
+
+
 

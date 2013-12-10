@@ -50,7 +50,7 @@ reportPrint(Report,[Name|L]) :-
     reportPrint(Report,L).
 
 %
-% Generates a repport asking question to the users
+% Generates a report asking question to the users
 %
 reportAskUser(Report,UserName) :-
     checkboxesList(AllNames) ->
