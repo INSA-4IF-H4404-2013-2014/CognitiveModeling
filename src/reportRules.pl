@@ -255,7 +255,11 @@ reportReversedWays(A,B) :-
 %
 reportRule131(A,B,100) :-
     reportReversedWays(A,B),
-    reportIsChecked(A,c15),
+    (
+		reportIsChecked(A,c15);
+		reportIsChecked(A,c24);
+		reportIsChecked(A,c22)
+	),
 	not(reportIsChecked(B,c15)).
 
 :- reportDefineRule(reportRule131).

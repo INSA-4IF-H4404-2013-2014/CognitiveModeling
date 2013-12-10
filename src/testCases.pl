@@ -180,6 +180,18 @@ testCase('test rule 132',A,B,50,1,reportRule132) :-
 	reportCheck(G1,c15,A),
 	A = B.
 	
+testCase('test rule 131 : sketch 1',A,B,0,1,reportRule131) :-
+    reportCreate(G0),
+    reportCheck(G0,c25,G1),
+	reportCheck(G1,c02,A),
+    reportCheck(G1,c24,B).
+	
+testCase('test rule 131 : sketch 2',A,B,0,1,reportRule131) :-
+    reportCreate(G0),
+    reportCheck(G0,c25,G1),
+	reportCheck(G1,c02,A),
+    reportCheck(G1,c22,B).
+	
 %
 % Exec a specific test case
 %
