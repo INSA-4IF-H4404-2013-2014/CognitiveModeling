@@ -197,7 +197,13 @@ testCase('test rule 41',A,B,100,1,reportRule41) :-
 	reportCheck(G0,c06,A),
 	reportCheck(G0,c07,B).
 
-testCase('test rule 42',A,B,0,1,reportRule42) :-
+testCase('test rule 42',A,_,100,1,reportRule42) :-
+	reportCreate(G0),
+	reportCheck(G0,c12,G1),
+	reportCheck(G1,c16,G2),
+	reportCheck(G2,c23,A).
+
+testCase('test rule 45',A,B,0,1,reportRule45) :-
     reportCreate(B),
     reportCheck(B,c16,A).
 
