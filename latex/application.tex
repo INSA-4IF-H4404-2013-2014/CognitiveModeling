@@ -1,9 +1,73 @@
 \chapter{Application}
 
 \section{Noyau}
-hello world
+
+Nous avons eu le plssir, l'honneur et l'avantage d'implementer notre application expert a l'aide de SWI-Prolog car ceci est une revolution.
+L'avantage de prolog est l'utilisation des predicats pour l'implementation des regles que l'expert doit appliquer. Considerons par exemples :
+
+D'abord, je regarde si un des conducteurs a fait une faute grave. De deux choses l'une : soit la case qui correspond aux cas graves - la case
+17 "N'avait pas observé un signal de priorité ou un feu rouge"- a été cochée, soit dans les observations manuscrites il est signalé une
+infraction du type : non respect d'un stop, d'un panneau d'interdiction de dépasser ou d'un sens interdit. Dans ce cas, le conducteur a tous
+les torts : 100\%.
+
+Nous pouvon en debduir la regles~:
+
+\[A_{17} \Rightarrow A_{torts} = 100\% \cdot B_{torts} = 0\%\]
+
+Alors on en deduit le predicat~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportEvaluateFatalMistake(A,_,100) :-
+    reportIsChecked(A,c17).
+\end{lstlisting}
+
+Seulement, nous avons voulu que le noyeau utilise les regles de maniere deterministe. Alors nous avons un predicat dynamic listant l'ensemble
+des regles de l'expert qu'il parcour ensuite a l'evaluation des torts~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+:- dynamic reportEvaluateRules/1.
+:- retractall(reportEvaluateRules(_)).
+
+reportDefineRule(RulePredicate) :-
+    reportEvaluateRules(RulePredicate) -> (
+        true
+    ); (
+        assert(reportEvaluateRules(RulePredicate))
+    ).
+\end{lstlisting}
+
+Ainsi il nous faut simplement dir au noyaux de considerer la regle reportEvaluateFatalMistake/3~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+:- reportDefineRule(reportEvaluateFatalMistake).
+\end{lstlisting}
+
+Et si les 2 conducteurs font une infraction grave ?
+C'est rare, mais dans ce cas, on partage les torts : 50\% chacun.
+
+Nous arions pus coder une regles du genre~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportEvaluateFatalMistake50(A,B,50) :-
+    reportIsChecked(A,c17),
+    reportIsChecked(B,c17).
+\end{lstlisting}
+
+Mais sela duplique le code pour chaque regle, pouvant etre la cause d'une erreure. Seulement, le noyeau va tester~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportEvaluateFatalMistake(A,B,TortsA).
+\end{lstlisting}
+
+Mais aussi~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportEvaluateFatalMistake(B,A,TortsB).
+\end{lstlisting}
+
+Alors, si les deux predicats sont verifi\'e, le noyaux en d\'eduit automatiquement~:
+
+\[A_{torts} = 50\% \cdot B_{torts} = 50\%\]
 
 \section{Test unitaires}
 
-A chaque implémentation d'une règle, un test unitaire est codé : il construit un rapport avec certaines cases cochées, et on donne la règle qui doit s'exécuter.
-En cas de collision, la procédure qui exécute tous les tests s'arrête, et donne la règle qui a effectivement été utilisée : soit la nouvelle règle est redondante et est supprimée, soit la règle utilisée doit être précisée. Généralement, on lui ajoute le prédicat "not(nouvelleRegle)". 
