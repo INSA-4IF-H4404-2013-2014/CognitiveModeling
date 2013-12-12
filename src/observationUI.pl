@@ -25,7 +25,7 @@ checkboxesPrint:-
 
 writeList([]).
 writeList([T|Q]) :-
-    write(T), nl,
+    write(T),
     writeList(Q).
 
 
@@ -41,7 +41,7 @@ userRead(Col, Letter, Cond) :-
     checkboxesPrint,
     write('conducteur '),
     write(Letter),
-    write(' cases ? :'), nl,
+    write(' cases ? (pensez a mettre les\"\" dans votre reponse):'), nl,
     read(X), nl,
     atom_codes(C,X),
     splitText(C,L),
@@ -57,9 +57,20 @@ testCheckList:-
 makeReport :-
     reportCreate(G0),
     userRead(G0, 'A', A),
-    writeList(A),
     userRead(G0, 'B', B),
-    writeList(B).
+    reportEvaluate(A,B,WrongsAC,TriggeredRule),
+        write('cases A: '),
+        writeList(A),
+        nl,
+        write('cases B: '),
+        writeList(B),
+        nl,
+        write('# rule that has been triggered: '),
+        write(TriggeredRule),
+        write('\n'),
+        write('# wrongs A = '),
+        write(WrongsAC),
+        write('\n').
 
 
     
