@@ -66,8 +66,10 @@ askOk(Res):-
     write('le resultat est il bon ? (y ou n) '),
     nl,
     get_single_char(C),
-    (121== C ; 
-    110 == C)->
+    (
+        121== C ; 
+        110== C
+    )->
     Res is C;
     askOk(Res).
 
@@ -76,8 +78,10 @@ getRealWrong(Res):-
     nl,
     read(C),
     number_codes(Ans, C),
-    (-1<Ans;
-    101>Ans)->
+    (
+        Ans> -1 ,
+        Ans<101
+    )->
     Res is Ans;
     getRealWrong(Res).
    
