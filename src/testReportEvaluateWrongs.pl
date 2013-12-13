@@ -42,7 +42,12 @@ testReportEvaluateWrongsPrior :-
 	retract(reportEvaluateWrongsPriorDB(G2, H2, 75)),
 	not(reportEvaluate(G2, H2, 75, _)),
 	assert(reportEvaluateWrongsPriorDB(G2, H2, 54)),
-	reportEvaluate(H2, G2, 46, exception).
+	reportEvaluate(H2, G2, 46, exception),
+	retract(reportEvaluateWrongsPriorDB(G2, H2, 54)),
+	assert(reportEvaluateWrongsPriorDB(G2, H2, -1)),
+	reportEvaluate(G2, H2, -1, exception),
+	reportEvaluate(H2, G2, -1, exception),
+	retractall(reportEvaluateWrongsPriorDB(_, _, _)).
 
 testReportEvaluateWrongs :-
     test(testReportSymetricWrongs),

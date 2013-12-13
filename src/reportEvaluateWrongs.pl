@@ -7,6 +7,7 @@
 % Compute the other car wrongs
 %
 reportSymetricWrongs(WrongsA,WrongsB) :-
+	((WrongsA == -1) -> WrongsB is -1) ;
     WrongsB is 100 - WrongsA.
 
 %
