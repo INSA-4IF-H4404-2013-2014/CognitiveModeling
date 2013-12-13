@@ -79,7 +79,7 @@ getRealWrong(Res):-
     read(C),
     number_codes(Ans, C),
     (
-        Ans> -1 ,
+        Ans> -2 ,
         Ans<101
     )->
     Res is Ans;
