@@ -1,0 +1,22 @@
+1---------------
+A : c08 c11
+B : c11
+ 
+regle 132 
+A 100
+
+2---------------
+A : c08 c11
+B : c08
+ 
+regle corrupted 
+A -1
+
+
+3---------------
+A : 02
+B : 02
+
+regle undefined
+A 50
+ changer ...
