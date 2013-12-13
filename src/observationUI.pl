@@ -47,14 +47,20 @@ splitText(X,L) :-
     atomic_list_concat(L,' ', X).
 
 userRead(Col, Letter, Cond) :- 
-    checkboxesPrint,
-    write('conducteur '),
-    write(Letter),
-    write(' quelles cases ? (pensez a mettre les\"\" dans votre reponse):'), nl,
-    read(X), nl,
-    atom_codes(C,X),
-    splitText(C,L),
-    checkList(Col, L, Cond).
+    (
+        checkboxesPrint,
+        write('conducteur '),
+        write(Letter),
+        write(' quelles cases ? (pensez a mettre les\"\" dans votre reponse):'), nl,
+        read(X), nl
+    ) -> (
+        not(length(X,0))->
+        (
+            atom_codes(C,X),
+            splitText(C,L),
+            checkList(Col, L, Cond)
+        ); Cond = Col
+    ).
 
 testCheckList:-
     L = ['c01', 'c15'],
