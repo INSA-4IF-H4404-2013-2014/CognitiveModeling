@@ -8,6 +8,16 @@ CLEAN_CMD+= *.backup *.aux *.toc *.ind *.idx *.ilg *.blg *.log *.out *.bbl *.dvi
 CLEAN_CMD+= *.nav *.pyg *.snm *.lof *.glg *.glo *.gls *.acn *.acr *.alg *.ist
 CLEAN_CMD+= 2> /dev/null
 
+#AUTOMATIC OS DETECTION
+OS=$(shell uname -s)
+ifeq ($(OS),Darwin)
+PDFVIEWER=open
+else
+ifeq ($(OS),Linux)
+PDFVIEWER=evince
+endif
+endif
+
 .PHONY: build clean
 
 build: $(TEX_NAME).pdf
@@ -17,6 +27,9 @@ clean:
 	@$(CLEAN_CMD)
 	@rm -f $(TEX_NAME).pdf
 	@echo "# cleaned" ;
+
+view:
+	@$(PDFVIEWER) $(TEX_NAME).pdf > /dev/null 2>&1 &
 
 %.pdf: %.tex $(wildcard *.tex)
 	@$(CLEAN_CMD)
