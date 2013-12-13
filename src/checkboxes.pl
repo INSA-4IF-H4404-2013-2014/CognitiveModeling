@@ -2,29 +2,29 @@
 %
 % defines all checkboxes' titles
 %
-checkboxTitle(c01, 'en stationnement / a l\'arret').
-checkboxTitle(c02, 'quittait un stationnement / ouvrait une portiere').
-checkboxTitle(c03, 'prenait un stationnement').
-checkboxTitle(c04, 'sortait d\'un parking, d\'un lieu prive, d\'un chemin de terre').
-checkboxTitle(c05, 's\'engageait dans un parking, dans un lieu prive, dans un chemin de terre').
-checkboxTitle(c06, 's\'engageait sur une place à sens giratoire').
-checkboxTitle(c07, 'roulait dans une place à sens giratoire').
-checkboxTitle(c08, 'heurtant à l\'arriere, en roulant dans le même sens et sur une meme file').
-checkboxTitle(c09, 'roulait dans la meme sens et sur un file differente').
-checkboxTitle(c10, 'changeait de file').
-checkboxTitle(c11, 'doublait').
-checkboxTitle(c12, 'virait à droite').
-checkboxTitle(c13, 'virait à gauche').
-checkboxTitle(c14, 'reculait').
-checkboxTitle(c15, 'empietait sur une voie reservee a la circulation en sens inverse').
-checkboxTitle(c16, 'venait de droite (dans un carrefour').
-checkboxTitle(c17, 'n\'avait pas observe un signal de priorite ou un feu rouge').
-checkboxTitle(c20, 'était en stationnement irregulier en agglomeration, pas le long d\'un trottoir').
-checkboxTitle(c21, 'était en stationnement irregulier hors agglomeration').
-checkboxTitle(c22, 'avait franchi la ligne continue').
-checkboxTitle(c23, 'virait a droite malgre une fleche orange clignotante').
-checkboxTitle(c24, 'avait franchi l\'axe median').
-checkboxTitle(c23, 'roulait en sens inverse, le franchissement de l\'axe median n\'est pas determine').
+checkboxTitle(c01, 'En stationnement / à l\'arrêt').
+checkboxTitle(c02, 'Quittait un stationnement / ouvrait une portière').
+checkboxTitle(c03, 'Prenait un stationnement').
+checkboxTitle(c04, 'Sortait d\'un parking, d\'un lieu privé, d\'un chemin de terre').
+checkboxTitle(c05, 'S\'engageait dans un parking, dans un lieu privé, dans un chemin de terre').
+checkboxTitle(c06, 'S\'engageait sur une place à sens giratoire').
+checkboxTitle(c07, 'Roulait dans une place à sens giratoire').
+checkboxTitle(c08, 'Heurtant à l\'arrière, en roulant dans le même sens et sur une même file').
+checkboxTitle(c09, 'Roulait dans le même sens et sur une file différente').
+checkboxTitle(c10, 'Changeait de file').
+checkboxTitle(c11, 'Doublait').
+checkboxTitle(c12, 'Virait à droite').
+checkboxTitle(c13, 'Virait à gauche').
+checkboxTitle(c14, 'Reculait').
+checkboxTitle(c15, 'Empiétait sur une voie réservée à la circulation en sens inverse').
+checkboxTitle(c16, 'Venait de droite (dans un carrefour').
+checkboxTitle(c17, 'N\'avait pas observé un signal de priorité ou un feu rouge').
+checkboxTitle(c20, 'Était en stationnement irrégulier en agglomération, pas le long d\'un trottoir').
+checkboxTitle(c21, 'Était en stationnement irrégulier hors agglomération').
+checkboxTitle(c22, 'Avait franchi la ligne continue').
+checkboxTitle(c23, 'Flèche orange clignotante').
+checkboxTitle(c24, 'Avait franchi l\'axe médian').
+checkboxTitle(c25, 'Roulait en sens inverse').
 
 %
 % lists all checkboxes's names

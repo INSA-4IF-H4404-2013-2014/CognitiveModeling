@@ -8,7 +8,6 @@
 23 ET 13
 
 A8 et B8
-A9 ET B9
 A16 ET B16
 A1 ET B1 ET aucune autre case
 A25 ET (B8 OU B9)

@@ -1,11 +1,13 @@
 
 :- [report].
+:- [reportPrune].
 
 
 %
 % Compute the other car wrongs
 %
 reportSymetricWrongs(WrongsA,WrongsB) :-
+	((WrongsA == -1) -> WrongsB is -1) ;
     WrongsB is 100 - WrongsA.
 
 %
@@ -44,6 +46,10 @@ reportEvaluateWrongs(_,_,50,undefined,[]).
 
 reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
     call(Rule,ReportA,ReportB,WrongsA) -> (
+        (WrongsA == -1) -> (
+            Evaluator = Rule,
+            WrongsAReturned = -1
+        );
         call(Rule,ReportB,ReportA,WrongsA) -> (
             Evaluator = Rule,
             WrongsAReturned = 50
@@ -53,8 +59,36 @@ reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,[Rule|Rules]) :-
         )
     );
     call(Rule,ReportB,ReportA,WrongsB) -> (
-        reportSymetricWrongs(WrongsB,WrongsAReturned),
-        Evaluator = Rule
+        (WrongsB == -1) -> (
+            Evaluator = Rule,
+            WrongsAReturned = -1
+        ); (
+            reportSymetricWrongs(WrongsB,WrongsAReturned),
+            Evaluator = Rule
+        )
     );
     reportEvaluateWrongs(ReportA,ReportB,WrongsAReturned,Evaluator,Rules).
+
+%
+% Evaluates priority wrongs
+% i.e: wrongs that have to be checked before regular ones.
+%
+:- dynamic reportEvaluateWrongsPriorDB/3.
+:- retractall(reportEvaluateWrongsPriorDB(_, _, _)).
+reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, exception) :-
+	reportEvaluateWrongsPriorDB(NewReportA, NewReportB, WrongsA) ;
+	(
+		reportEvaluateWrongsPriorDB(NewReportB, NewReportA, WrongsB),
+		reportSymetricWrongs(WrongsB,WrongsA)
+	).
+
+%
+% Prunes and evaluate wrongs
+%
+reportEvaluate(ReportA,ReportB,WrongsA,Evaluator) :-
+    reportPrune(ReportA,ReportB,NewReportA,NewReportB) ->
+	(
+		reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, Evaluator) ;
+		reportEvaluateWrongs(NewReportA,NewReportB,WrongsA,Evaluator)
+	).
 

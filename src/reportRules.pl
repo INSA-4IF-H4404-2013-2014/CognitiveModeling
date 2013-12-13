@@ -1,9 +1,75 @@
 
 :-[reportEvaluateWrongs].
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Corrupted forms
+%
+reportAreCorruptedBoth8(A,B,-1) :-
+    reportIsChecked(A,c08),
+    reportIsChecked(B,c08).
+
+:- reportDefineRule(reportAreCorruptedBoth8).
+
+reportAreCorruptedBoth9(A,B,-1) :-
+    reportIsChecked(A,c09),
+    reportIsChecked(B,c09).
+
+% testCase 3 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorruptedBoth9).
+
+reportAreCorruptedBoth16(A,B,-1) :-
+    reportIsChecked(A,c16),
+    reportIsChecked(B,c16).
+
+:- reportDefineRule(reportAreCorruptedBoth16).
+
+reportAreCorrupted4and5(A,_,-1) :-
+    reportIsChecked(A,c04),
+    reportIsChecked(A,c05).
+
+:- reportDefineRule(reportAreCorrupted4and5).
+
+reportAreCorrupted6and7(A,_,-1) :-
+    reportIsChecked(A,c06),
+    reportIsChecked(A,c07).
+
+% testCase 17 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorrupted6and7).
 
 %
-% Fautes grave%
+% Si un conducteur a coché les cases 12 et 13, le constat est incohérent. De même s’il a coché les cases 8 et 9.
+%
+reportAreCorrupted8and9(A,_,-1) :-
+    reportIsChecked(A,c08),
+    reportIsChecked(A,c09).
+
+:- reportDefineRule(reportAreCorrupted8and9).
+
+reportAreCorrupted12and13(A,_,-1) :-
+    reportIsChecked(A,c12),
+    reportIsChecked(A,c13).
+
+% testCase 20 is not supposed to be corrupted
+%:- reportDefineRule(reportAreCorrupted12and13).
+
+reportAreCorrupted7and16(A,_,-1) :-
+    reportIsChecked(A,c07),
+    reportIsChecked(A,c16).
+
+:- reportDefineRule(reportAreCorrupted7and16).
+
+reportAreCorruptedParking(A,B,-1) :-
+    reportIsChecked(A,c01),
+    reportIsChecked(B,c01),
+    not(reportIsChecked(A,c02)),
+    not(reportIsChecked(B,c02)).
+
+:- reportDefineRule(reportAreCorruptedParking).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%% 1: Fautes graves%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 reportEvaluateFatalMistake(A,_,100) :-
     reportIsChecked(A,c04);
@@ -12,8 +78,9 @@ reportEvaluateFatalMistake(A,_,100) :-
 
 :- reportDefineRule(reportEvaluateFatalMistake).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% 2) Véhicule en stationnement
+%%%%%%%%%%% 2: Véhicule en stationnement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 reportParking(A,B) :-
     reportIsChecked(A,c01);
@@ -36,7 +103,7 @@ reportRule21(A,B,0) :-
 
 %
 % En revanche, si le véhicule était en stationnement (ou arrêt) irrégulier en agglomération, mais pas le long dun trottoir,
-% alors il a 25% des torts. 
+% alors il a 25% des torts.
 %
 reportRule22(A,B,25) :-
     reportParking(A,B),
@@ -52,7 +119,10 @@ reportRule22(A,B,25) :-
 reportRule23(A,B,50) :-
     reportParking(A,B),
     not(reportRule24(A,B,_)),
+    not(reportRule24(B,A,_)),
     reportIsChecked(A,c21).
+
+:- reportDefineRule(reportRule23).
 
 %
 % Il faut aussi prendre en compte le cas de la portière. Dans ce cas, celui qui l a ouverte a tous les torts.
@@ -64,12 +134,13 @@ reportRule24(A,B,100) :-
 :- reportDefineRule(reportRule24).
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% 1) Véhicules circulant sur la même chaussée
+%%%% Véhicules circulant sur la même chaussée %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 
-%
-%   1) même sens, files différentes (A9 or A10 or B9 or B10)
+%%%%%% 5:  même sens, files différentes (A9 or A10 or B9 or B10) %%%%%%%%%%
 %
 % Si un des conducteurs, ou même les deux, a coché une des cases 9 "roulait dans le même sens et sur une file différente"
 % ou 10 "changeait de file", c est un accident "même sens, files différentes".
@@ -83,13 +154,22 @@ reportDifferentPath(A,B) :-
 %
 % un des 2 conducteurs a coché 10 : il a 100% des torts
 %
-% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% des torts chacun
-%
 reportRule111(A,B,100) :-
     reportDifferentPath(A,B),
-    reportIsChecked(A,c10).
+    reportIsChecked(A,c10),
+	not(reportIsChecked(B,c10)).
 
 :- reportDefineRule(reportRule111).
+
+%
+% les 2 conducteurs ont coché la case 10 (Changeait de file) : ils ont 50% de tort chacun
+%
+reportRule110(A,B,50) :-
+	reportDifferentPath(A,B),
+	reportIsChecked(A,c10),
+	reportIsChecked(B,c10).
+
+:- reportDefineRule(reportRule110).
 
 %
 % aucun n'a coché la case 10 : soit ils se sont accrochés en roulant parallèlement et dans ce cas ils ont 50% chacun, soit
@@ -112,8 +192,8 @@ reportRule113(A,B,50) :-
 
 :- reportDefineRule(reportRule113).
 
-%
-%   2) même sens, même file (A8 ^ !B1 ^ !B10)
+
+%%%%%% 7: même sens, même file (A8 ^ !B1 ^ !B10)  %%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Si un des conducteurs a coché la case 8 "heurtait l'arrière de l'autre véhicule qui roulait dans le même sens et sur
 % la même file"  et que l'autre n'a coché  ni 1, ni 10, c'est évidemment un cas de la sous-catégorie "même sens, même file".
@@ -131,11 +211,8 @@ reportSamePath(A,B) :-
 %
 reportRule121(A,B,0) :-
     reportSamePath(A,B),
-    (
-        reportIsChecked(B,c02);
-        reportIsChecked(B,c04);
-        reportIsChecked(B,c14)
-    ).
+	reportIsChecked(B,c02).
+
 
 :- reportDefineRule(reportRule121).
 
@@ -160,14 +237,14 @@ reportRule123(A,B,100) :-
 
 :- reportDefineRule(reportRule123).
 
-%
-%   3) véhicules circulant en sens inverse
+
+%%%%%% 6: véhicules circulant en sens inverse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Sinon, et le croquis est là pour confirmer, c'est un accident provoqué par des véhicules circulant en sens inverse.
 %
 reportReversedWays(A,B) :-
-    not(reportDifferentPath(A,B)),
-    not(reportSamePath(A,B)).
+   reportIsChecked(A,c25);
+   reportIsChecked(B,c25).
 
 %
 % Commençons par cette dernière sous-catégorie, qui est la plus simple à traiter : Si l'un des conducteurs a coché la
@@ -178,7 +255,12 @@ reportReversedWays(A,B) :-
 %
 reportRule131(A,B,100) :-
     reportReversedWays(A,B),
-    reportIsChecked(A,c15).
+    (
+		reportIsChecked(A,c15);
+		reportIsChecked(A,c24);
+		reportIsChecked(A,c22)
+	),
+	not(reportIsChecked(B,c15)).
 
 :- reportDefineRule(reportRule131).
 
@@ -187,13 +269,81 @@ reportRule132(A,B,50) :-
     not(reportRule131(A,B,_)).
 
 % don't active it yet !%
-%:- reportDefineRule(reportRule132).
+:- reportDefineRule(reportRule132).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%% 3:  quitte un stat %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Seul A quitte un stationnement
+%
+reportRule31(A,B,100) :-
+    reportIsChecked(A,c02),
+	not(reportIsChecked(B,c02)).
+
+:- reportDefineRule(reportRule31).
+%
+% A et B quittent un stationnement
+%
+reportRule32(A,B,50) :-
+    reportIsChecked(A,c02),
+	reportIsChecked(B,c02).
+
+:- reportDefineRule(reportRule32).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%% 4:  provenant de chaussées différentes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Case 6 : "S'engageait sur une place à sens giratoire," Le conducteur qui a coché cette case
+%(il ne doit cocher cette case que si les roues arrières de son véhicule ne sont pas encore dans le rond-point)
+% a tous les torts car l'autre, qui roulait à l'intérieur du sens giratoire a la priorité.
+
+reportRule41(A,B,100) :-
+	reportIsChecked(A,c06),
+	reportIsChecked(B,c07).
+
+:- reportDefineRule(reportRule41).
+
+% Sans compter le cas du conducteur qui venait de droite et virait à droite avec une flèche orange clignotante.
+% Il n'avait pas la priorité sur B qui passait au vert et il prend 100% de tort.
+
+reportRule42(A,_,100) :-
+	reportIsChecked(A,c12),
+	reportIsChecked(A,c16),
+	reportIsChecked(A,c23).
+
+:- reportDefineRule(reportRule42).
+
+
+% Mais si par exemple, il roulait sur une voie à double sens et qu'il empiétait sur l'axe médian,
+% ou à plus forte raison si il l'avait franchi alors il a droit à 25% des torts. 
+
+reportRule43(A,_,25) :-
+	reportIsChecked(A,c15),
+	reportIsChecked(A,c16),
+	reportIsChecked(A,c24),
+	not(reportIsChecked(A,c22)).
+
+:- reportDefineRule(reportRule43).
 
 %
-% 3) quitte un stat
+% Il coche la case 16 : "Venait de droite dans un carrefour" et il n'a aucun tort.
 %
-reportRule3(A,_,100) :-
-    reportIsChecked(A,c02).
+reportRule44(A,_,50) :-
+    reportIsChecked(A,c15),
+    reportIsChecked(A,c16),
+    reportIsChecked(A,c22),
+    reportIsChecked(A,c24).
 
-:- reportDefineRule(reportRule3).
+:- reportDefineRule(reportRule44).
 
+%
+% Il coche la case 16 : "Venait de droite dans un carrefour" et il n'a aucun tort.
+%
+reportRule45(A,_,0) :-
+    reportIsChecked(A,c16).
+
+:- reportDefineRule(reportRule45).
