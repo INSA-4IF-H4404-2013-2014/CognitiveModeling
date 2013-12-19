@@ -3,7 +3,65 @@
 
 \section{Ligne de commandes}
 
+Il est demandé à l'utilisateur de renseigner 4 champs différents.
+\begin{itemize}
+\item "cocher" les cases de A
+\item "cocher" les cases de B
+\item demander confirmation du résultat
+\item demander le vrai résultat si celui calculé ne convient pas
+\end{itemize}
+
+\vspace*{7mm}
+
+L'interface pour "cocher" les cases est réduite à une simple chaine de caractère. L'utilisateur doit lister en un coup toutes les cases qu'il veut cocher pour un conducteur donné. Pour l'aider un recaptiulatif lui rappelle pour chaque case à quelle situation elle réfère.
+\newline
+
+
+\begin{lstlisting}[frame=single]
+
+    c01 En stationnement / a l arret
+    c02 Quittait un stationnement / ouvrait une portiere
+    c03 Prenait un stationnement
+    c04 Sortait d un parking, d un lieu prive, d un chemin de terre
+    c05 S engageait dans un parking, dans un lieu prive, dans un chemin de terre
+    c06 S engageait sur une place a sens giratoire
+    c07 Roulait dans une place a sens giratoire
+    c08 Heurtant a l arriere, en roulant dans le meme sens et sur une meme file
+    c09 Roulait dans le meme sens et sur une file differente
+    c10 Changeait de file
+    c11 Doublait
+    c12 Virait a droite
+    c13 Virait a gauche
+    c14 Reculait
+    c15 Empietait sur une voie reservee a la circulation en sens inverse
+    c16 Venait de droite (dans un carrefour
+    c17 N avait pas observe un signal de priorite ou un feu rouge
+    c20 Etait en stationnement irregulier en agglomeration, pas le long d un trottoir
+    c21 Etait en stationnement irregulier hors agglomeration
+    c22 Avait franchi la ligne continue
+    c23 Fleche orange clignotante
+    c24 Avait franchi l axe median
+    c25 Roulait en sens inverse
+
+    conducteur A quelles cases ? (pensez a mettre les "" dans votre reponse):
+    |: 
+
+    "c08 c11".
+\end{lstlisting}
+
+Le programme vérifie si les cases entrées correspondent bien à un des numéros listés, sinon il affiche un message d'erreur et s'arrête.
+Si l'utilisateur tente de n'entrer aucune case, l'exécution génère naturellement une erreur.
+
+Une fois le résultat présenter l'interface demande au lecteur s'il est satifait du resultat en lui demandant d'entre y ou n. Le programme boucle tant qu'une de ces deux réponses n'est pas donnée.
+
+Si l'utilisateur répond oui, l'exécution se termine. S'il répond non le programe fera sa maintenance semi-automatique.
+
+
 \section{Maintenance semi-automatique}
+
+Pour comprendre le système de maintenance semi-automatique, il faut expliquer le fonctinonement de prolog.
+
+Prolog fonctionne par système de règles, posées dans des fichiers de code. Il est possible de déclarer de manière générique une règle en posant sa structure (nom, nombre d'arguments, etc. ), puis d'en implémenter plusieurs à partir d'elle ensuite.
 
 \section{Réflexion sur une maintenance complètement automatique}
 
