@@ -42,8 +42,8 @@ Ainsi, il nous faut simplement dire au noyau de considérer la règle \texttt{re
 :- reportDefineRule(reportEvaluateFatalMistake).
 \end{lstlisting}
 
-Et si les 2 conducteurs commettent une infraction grave~?
-C'est rare, mais dans ce cas, on partage les torts~: 50\% chacun.
+\textit{Et si les 2 conducteurs commettent une infraction grave~?
+C'est rare, mais dans ce cas, on partage les torts~: 50\% chacun.}
 
 Nous aurions pu implémenter une règle de la forme suivante~:
 
@@ -71,7 +71,7 @@ Alors, si les deux prédicats sont vérifiés, le noyau en déduit automatiqueme
 
 \section{Tests unitaires}
 
-À chaque implémentation d'une règle, un test unitaire est codé~: il construit un rapport avec certaines cases cochées, et on donne la règle qui doit s'exécuter.
+À chaque implémentation d'une règle, un test unitaire est codé~: il construit un rapport avec certaines cases cochées, et on donne la règle qui doit s'exécuter et le r\'esultat attendu.
 
 En cas de collision, la procédure qui exécute tous les tests s'arrête, et donne la règle qui a effectivement été utilisée~: soit la nouvelle règle est redondante et est supprimée, soit l'une des règles doit être précisée. Généralement, on lui ajoute le prédicat \texttt{not(autreRegle)}.
 
