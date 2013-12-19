@@ -1,9 +1,110 @@
-
 \chapter{Interface utilisateur}
+
+Le langage prolog ne permet pas d'implémenter naturellement une interface utilisateur graphique. Il s'utilise principalement en ligne de commande. Notre interface est donc uniquement textuelle. Cela pose des limites quant à notre mode de représentation dans la mesure où un constat et normalement un document papier de type formulaire avec des cases à cocher.
 
 \section{Ligne de commandes}
 
+Il est demandé à l'utilisateur de renseigner 4 champs différents.
+\begin{itemize}
+\item "cocher" les cases de A
+\item "cocher" les cases de B
+\item demander confirmation du résultat
+\item demander le vrai résultat si celui calculé ne convient pas
+\end{itemize}
+
+Nous avons considéré que la partie vérification du nombre de case aura été gérée en amont par l'utilisateur de ce programme. Nous n'avons donc pas implémenté la fonction qui demande celle-ci et qui la vérifie.
+
+L'interface pour "cocher" les cases est réduite à une simple chaine de caractère. L'utilisateur doit lister en un coup toutes les cases qu'il veut cocher pour un conducteur donné. Pour l'aider un recaptiulatif lui rappelle pour chaque case à quelle situation elle réfère.
+
+Pour pouvoir prendre en compte les observations complémentaires qui influencent également le calcul des torts nous avons choisit de considérer les informations pertinentes comme de nouvelles "cases à cocher". Ainsi nous avons 22 cases au lieu des 17 de base.
+Celles-ci sont condisérées comme des cases normales et entrent dans la liste au même titre que les autres.
+L'interface n'exige pas d'ordre particulier pour remplir les cases.
+
+A la page suivante, un exemple de l'interface.
+
+\begin{lstlisting}[frame=single]
+
+    c01 En stationnement / a l arret
+    c02 Quittait un stationnement / ouvrait une portiere
+    c03 Prenait un stationnement
+    c04 Sortait d un parking, d un lieu prive, d un chemin de terre
+    c05 S engageait dans un parking, dans un lieu prive, dans un chemin de terre
+    c06 S engageait sur une place a sens giratoire
+    c07 Roulait dans une place a sens giratoire
+    c08 Heurtant a l arriere, en roulant dans le meme sens et sur une meme file
+    c09 Roulait dans le meme sens et sur une file differente
+    c10 Changeait de file
+    c11 Doublait
+    c12 Virait a droite
+    c13 Virait a gauche
+    c14 Reculait
+    c15 Empietait sur une voie reservee a la circulation en sens inverse
+    c16 Venait de droite (dans un carrefour
+    c17 N avait pas observe un signal de priorite ou un feu rouge
+    c20 Etait en stationnement irregulier en agglomeration, pas le long d un trottoir
+    c21 Etait en stationnement irregulier hors agglomeration
+    c22 Avait franchi la ligne continue
+    c23 Fleche orange clignotante
+    c24 Avait franchi l axe median
+    c25 Roulait en sens inverse
+
+    conducteur A quelles cases ? (pensez a mettre les "" dans votre reponse):
+    |: "c08 c11".
+\end{lstlisting}
+
+Le programme vérifie si les cases entrées correspondent bien à un des numéros listés, sinon il affiche un message d'erreur et s'arrête.
+L'utilisateur peut également n'entrer aucune case.
+
+Une fois le résultat présenté, l'interface questionne le lecteur s'il est satifait du resultat en lui demandant d'entre y ou n. Le programme boucle tant qu'une de ces deux réponses n'est pas donnée.
+
+Si l'utilisateur répond oui, l'exécution se termine. S'il répond non le programe fera sa maintenance semi-automatique.
+
 \section{Maintenance semi-automatique}
+Nous avons été amenés à implémenter un mécanisme de maintenance semi-automatique dans notre système expert. Cela correspond au dispositif permettant à l'expert d'apprendre un nouveau cas particulier à notre système.
+
+\subsection{Principe général}
+Le processus se déroule comme suit~:
+\begin{itemize}
+	\item l'utilisateur coche les cases du constat pour la voiture A et la voiture B~;
+	\item notre système détermine les torts avec les règles actuelles~;
+	\item le système demande à l'utilisateur (l'expert) si ces torts sont valides. Si l'expert est satisfait, il répond «~oui~» et le système ne change pas son comportement. Dans le cas contraire, notre système enregistre la nouvelle règle.
+\end{itemize}
+
+\subsection{Implémentation}
+Maintenant que nous avons vu le principe général, intéressons-nous au détail de l'implémentation.
+
+Lorsque notre système ne renvoie pas les bons torts et que l'expert indique les torts de A, il est important que notre système enregistre la nouvelle règle comme étant \textbf{prioritaire} par rapport aux règles standards. Ainsi, elle se déclenchera avant celles-ci.
+
+Nous utilisons le mécanisme de \textbf{prédicat dynamique} que nous fournit \texttt{Prolog} pour implémenter la maintenance semi-automatique.
+
+\begin{lstlisting}[language=Prolog,frame=single]
+:- dynamic reportEvaluateWrongsPriorDB/3.
+:- retractall(reportEvaluateWrongsPriorDB(_, _, _)).
+\end{lstlisting}
+
+Le prédicat \texttt{reportEvaluateWrongsPriorDB/3} constitue la base de données de règles prioritaires que l'expert a rentrées lors de la maintenance semi-automatique. Au début, cette base est vide, et seules les règles standards sont utilisées pour déterminer les torts. Les paramètres de ce prédicat correspondent respectivement aux cases à cocher de A, cases à cocher de B, et tort de A.
+
+Il suffit ensuite de faire en sorte que ce prédicat dynamique soit essayé en premier, avant les prédicats statiques. Cela est implémenté comme suit~:
+
+\begin{lstlisting}[language=Prolog,frame=single]
+reportEvaluate(ReportA,ReportB,WrongsA,Evaluator) :-
+    reportPrune(ReportA,ReportB,NewReportA,NewReportB) ->
+	(
+		reportEvaluateWrongsPrior(NewReportA, NewReportB, WrongsA, Evaluator) ;
+		reportEvaluateWrongs(NewReportA,NewReportB,WrongsA,Evaluator)
+	).
+\end{lstlisting}
+
+Il apparaît clairement dans ce code que \texttt{reportEvaluateWrongsPrior/4} est essayé avant \texttt{reportEvaluateWrongs/4}. \texttt{reportEvaluateWrongsPrior/4} n'est en fait qu'une surcouche du prédicat dynamique \texttt{reportEvaluateWrongsPriorDB/3} permettant de gérer la symétrie entre A et B.
+
+\subsection{Cas limite}
+Lors de la maintenance semi-automatique, il existe le cas limite que l'expert se contredise lui-même, c'est-à-dire qu'il rentre un même état de cases à cocher pour A et B, mais avec des torts différents. Cela rompt l'automatisme du système car notre système a donc stocké deux répartitions des torts différentes pour un cas qui semble être le même, et la réponse n'est plus unique. Il y a deux approches pour régler ce problème.
+\begin{itemize}
+	\item On peut considérer que l'expert doit être cohérent avec lui-même, et lui afficher un message d'avertissement si l'on détecte plusieurs prédicats identiques mais avec des torts différents. On pourrait dans se cas lui proposer d'écraser l'ancienne règle par la nouvelle.
+	\item Ou alors, on peut considérer qu'après tout, il n'est pas incohérent d'avoir plusieurs réponses, dans la mesure où, pour un même ensemble de cases cochées entre A et B, la situation peut être différente, lorsqu'un croquis permet de départager la situation. On pourrait alors demander à l'expert, lors de la maintenance automatique, d'associer une description textuelle à la nouvelle règle. Ainsi, lors du listing des différents torts possibles pour un ensemble de cases cochées, on verrait la description et on pourrait faire la différence.\\
+\end{itemize}
+
+Malheureusement, cette dernière solution ne résout pas le problème de la rupture de l'automatisme du système.
 
 \section{Réflexion sur une maintenance complètement automatique}
 
