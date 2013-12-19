@@ -1,10 +1,10 @@
 \chapter{Choix du langage \texttt{Prolog}}
-\texttt{Prolog} est un langage créé en 1972 par Alain~\textsc{Colmerauer} et Philippe~\textsc{Roussel}. Ce langage tire son nom de «~\textbf{PRO}grammation \textbf{LOG}ique~». Il supporte les mécanismes d' \textbf{unification}, de \textbf{récursivité} et de \textbf{retour sur trace} (\textit{backtracking}).\\
+\texttt{Prolog} est un langage créé en 1972 par Alain~\textsc{Colmerauer} et Philippe~\textsc{Roussel}. Ce langage tire son nom de «~\textbf{PRO}grammation \textbf{LOG}ique~». Il supporte les mécanismes d' \textbf{unification}, de \textbf{récursivité} et de \textbf{retour sur trace} (\textit{backtracking}).
 
-Le langage \texttt{Prolog} permet au programmeur de se concentrer sur l'écriture des prédicats et des relations logiques qui les relient, laissant au compilateur la tâche de convertir cette écriture logique en instructions machine.\\
+Le langage \texttt{Prolog} permet au programmeur de se concentrer sur l'écriture des prédicats et des relations logiques qui les relient, laissant au compilateur la tâche de convertir cette écriture logique en instructions machine.
 
-Le moteur de \texttt{Prolog} se sert d'une \textbf{base de faits} et d'une \textbf{base de règles} pour tenter de prouver un \textbf{but}. Lorsqu'un but n'a pas pu être prouvé en marche avant, \texttt{Prolog} revient sur ses pas (\textit{backtracking}) pour tenter de prouver le but d'une autre manière.\\
+Le moteur de \texttt{Prolog} se sert d'une \textbf{base de faits} et d'une \textbf{base de règles} pour tenter de prouver un \textbf{but}. Lorsqu'un but n'a pas pu être prouvé en marche avant, \texttt{Prolog} revient sur ses pas (\textit{backtracking}) pour tenter de prouver le but d'une autre manière.
 
-\texttt{Prolog} étant un langage adapté à la programmation par contraintes, il a été particulièrement adapté à la programmation de notre système expert, qui repose justement sur des relations entre prédicats.\\
+\texttt{Prolog} étant un langage de programmation par contraintes, il a été particulièrement adapté à la programmation de notre système expert, qui repose justement sur des relations entre prédicats.
 
 Concevoir un système expert a pour but à court terme d'assister l'expert, mais à long terme de le remplacer. Ainsi, le système expert doit être un programme appliquant des règles de départ statiques, avec la possibilité d'apprendre automatiquement (avec l'aide de l'expert) des cas particuliers, constituant les règles dynamiques. Le programme doit donc être capable d'\textbf{apprendre}. Et c'est cet apprentissage qu'il est particulièrement facile d'implémenter avec \texttt{Prolog}, grâce au mécanisme de \textbf{prédicat dynamique}.

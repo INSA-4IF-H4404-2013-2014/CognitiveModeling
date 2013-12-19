@@ -1,6 +1,6 @@
 \chapter{Interface utilisateur}
 
-Le langage prolog ne permet pas d'implémenter naturellement une interface utilisateur graphique. Il s'utilise principalement en ligne de commande. Notre interface est donc uniquement textuelle. Cela pose des limites quant à notre mode de représentation dzns la mesure où un constat et normalement un document papier de type formulaire avec des cases à cocher.
+Le langage prolog ne permet pas d'implémenter naturellement une interface utilisateur graphique. Il s'utilise principalement en ligne de commande. Notre interface est donc uniquement textuelle. Cela pose des limites quant à notre mode de représentation dans la mesure où un constat et normalement un document papier de type formulaire avec des cases à cocher.
 
 \section{Ligne de commandes}
 
@@ -12,21 +12,15 @@ Il est demandé à l'utilisateur de renseigner 4 champs différents.
 \item demander le vrai résultat si celui calculé ne convient pas
 \end{itemize}
 
-\vspace*{7mm}
 Nous avons considéré que la partie vérification du nombre de case aura été gérée en amont par l'utilisateur de ce programme. Nous n'avons donc pas implémenté la fonction qui demande celle-ci et qui la vérifie.
 
 L'interface pour "cocher" les cases est réduite à une simple chaine de caractère. L'utilisateur doit lister en un coup toutes les cases qu'il veut cocher pour un conducteur donné. Pour l'aider un recaptiulatif lui rappelle pour chaque case à quelle situation elle réfère.
-\newline
-\vspace*{7mm}
 
 Pour pouvoir prendre en compte les observations complémentaires qui influencent également le calcul des torts nous avons choisit de considérer les informations pertinentes comme de nouvelles "cases à cocher". Ainsi nous avons 22 cases au lieu des 17 de base.
 Celles-ci sont condisérées comme des cases normales et entrent dans la liste au même titre que les autres.
 L'interface n'exige pas d'ordre particulier pour remplir les cases.
-\newline
 
 A la page suivante, un exemple de l'interface.
-
-\newpage
 
 \begin{lstlisting}[frame=single]
 
@@ -55,9 +49,7 @@ A la page suivante, un exemple de l'interface.
     c25 Roulait en sens inverse
 
     conducteur A quelles cases ? (pensez a mettre les "" dans votre reponse):
-    |: 
-
-    "c08 c11".
+    |: "c08 c11".
 \end{lstlisting}
 
 Le programme vérifie si les cases entrées correspondent bien à un des numéros listés, sinon il affiche un message d'erreur et s'arrête.
