@@ -1,6 +1,8 @@
 
 \chapter{Interface utilisateur}
 
+Le langage prolog ne permet pas d'implémenter naturellement une interface utilisateur graphique. Il s'utilise principalement en ligne de commande. Notre interface est donc uniquement textuelle. Cela pose des limites quant à notre mode de représentation dzns la mesure où un constat et normalement un document papier de type formulaire avec des cases à cocher.
+
 \section{Ligne de commandes}
 
 Il est demandé à l'utilisateur de renseigner 4 champs différents.
@@ -12,10 +14,20 @@ Il est demandé à l'utilisateur de renseigner 4 champs différents.
 \end{itemize}
 
 \vspace*{7mm}
+Nous avons considéré que la partie vérification du nombre de case aura été gérée en amont par l'utilisateur de ce programme. Nous n'avons donc pas implémenté la fonction qui demande celle-ci et qui la vérifie.
 
 L'interface pour "cocher" les cases est réduite à une simple chaine de caractère. L'utilisateur doit lister en un coup toutes les cases qu'il veut cocher pour un conducteur donné. Pour l'aider un recaptiulatif lui rappelle pour chaque case à quelle situation elle réfère.
 \newline
+\vspace*{7mm}
 
+Pour pouvoir prendre en compte les observations complémentaires qui influencent également le calcul des torts nous avons choisit de considérer les informations pertinentes comme de nouvelles "cases à cocher". Ainsi nous avons 22 cases au lieu des 17 de base.
+Celles-ci sont condisérées comme des cases normales et entrent dans la liste au même titre que les autres.
+L'interface n'exige pas d'ordre particulier pour remplir les cases.
+\newline
+
+A la page suivante, un exemple de l'interface.
+
+\newpage
 
 \begin{lstlisting}[frame=single]
 
@@ -50,18 +62,43 @@ L'interface pour "cocher" les cases est réduite à une simple chaine de caract�
 \end{lstlisting}
 
 Le programme vérifie si les cases entrées correspondent bien à un des numéros listés, sinon il affiche un message d'erreur et s'arrête.
-Si l'utilisateur tente de n'entrer aucune case, l'exécution génère naturellement une erreur.
+L'utilisateur peut également n'entrer aucune case.
 
-Une fois le résultat présenter l'interface demande au lecteur s'il est satifait du resultat en lui demandant d'entre y ou n. Le programme boucle tant qu'une de ces deux réponses n'est pas donnée.
+Une fois le résultat présenté, l'interface questionne le lecteur s'il est satifait du resultat en lui demandant d'entre y ou n. Le programme boucle tant qu'une de ces deux réponses n'est pas donnée.
 
 Si l'utilisateur répond oui, l'exécution se termine. S'il répond non le programe fera sa maintenance semi-automatique.
 
 
 \section{Maintenance semi-automatique}
 
-Pour comprendre le système de maintenance semi-automatique, il faut expliquer le fonctinonement de prolog.
+Pour comprendre le système de maintenance semi-automatique, il faut expliquer le fonctionnement de prolog.
 
 Prolog fonctionne par système de règles, posées dans des fichiers de code. Il est possible de déclarer de manière générique une règle en posant sa structure (nom, nombre d'arguments, etc. ), puis d'en implémenter plusieurs à partir d'elle ensuite.
+
+Nous avons construit une base de fait  partir d'une règle qui permet de déclarer d'autres règles.
+
+\begin{lstlisting}[frame=single]
+reportDefineRule(RulePredicate)
+\end{lstlisting}
+
+où les RulePredicate prennent la forme de 
+
+\begin{lstlisting}[frame=single]
+reportRuleZ(A,B,X) 
+\end{lstlisting}
+
+où Z est le nom de la règle particulière 
+\newline
+A les cases cochées par le conducteur A
+\newline
+B les cases cochées par le conducteur B
+\newline
+et X le tort calculé de A
+\newline
+
+Lorsqu'un utilisateur conteste une évaluation des torts, l'interface lui demande d'entrer les nouveaux torts que celui-ci attendait. Le programme créera ensuite une nouvelle règle nommée exceptionY (Y un numéro qui s'incrémente) qui sera testée avant toute les autres. Ainsi pour le cas particulier qui a ammené l'utilisateur à contester le calcul il y aura maintenant une règle propre. 
+
+
 
 \section{Réflexion sur une maintenance complètement automatique}
 
